@@ -1344,7 +1344,7 @@ document.getElementById('preferredCommittee').addEventListener('change', showCom
 async function submitFormWithRetry(jsonData, maxRetries = 5) {
     for (let attempt = 0; attempt < maxRetries; attempt++) {
         try {
-            const response = await fetch('https://script.google.com/macros/s/AKfycbxoGaIPsrhSyiFfgrd8uMXoTSRdcx2UA8TKAPfkLZlwS2tK_EOuELUhLJap8iosqzcH/exec', {
+            const response = await fetch('https://script.google.com/macros/s/AKfycbzapKa5Lnh3SOPgosSBTMncOTIfjRPt_SpKOPP6q-JSJMrjTpPIrhJMDmotuyQhqFyt/exec', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -1486,27 +1486,19 @@ function submitForm(event) {
         return;
     }
    
-    // If all validations pass, proceed with form submission
-    loadingOverlay.classList.add('active');
+      loadingOverlay.classList.add('active');
     
     const formData = new FormData(form);
     const jsonData = {};
     
     // Handle regular form fields
     formData.forEach((value, key) => {
-        if (key !== 'skills') { // Exclude skills from this loop
-            if (jsonData[key]) {
-                if (!Array.isArray(jsonData[key])) {
-                    jsonData[key] = [jsonData[key]];
-                }
-                jsonData[key].push(value);
-            } else {
-                jsonData[key] = value;
-            }
+        if (key !== 'skills') {
+            jsonData[key] = value;
         }
     });
     
-    // Handle skills checkboxes specifically
+    // Handle skills checkboxes
     const selectedSkills = Array.from(document.querySelectorAll('.skill-checkbox:checked'))
         .map(checkbox => checkbox.value);
     jsonData['skills'] = selectedSkills;
@@ -1520,22 +1512,32 @@ function submitForm(event) {
         });
     }
 
-    submitFormWithFallback(jsonData)
-        .then(result => {
-            loadingOverlay.classList.remove('active');
-            if (result.result === 'success') {
-                showQuoteModal();
-                form.reset();
-                updateProgress();
-            } else {
-                throw new Error('Submission failed');
-            }
-        })
-        .catch(error => {
-            loadingOverlay.classList.remove('active');
-            alert('There was an error submitting your application. Please try again later.');
-            console.error('Submission error:', error);
-        });
+    const URL = 'https://script.google.com/macros/s/AKfycbzapKa5Lnh3SOPgosSBTMncOTIfjRPt_SpKOPP6q-JSJMrjTpPIrhJMDmotuyQhqFyt/exec';
+
+    fetch(URL, {
+        redirect: "follow",
+        method: "POST",
+        body: JSON.stringify(jsonData),
+        headers: {
+            "Content-Type": "text/plain;charset=utf-8",
+        },
+    })
+    .then(response => response.json())
+    .then(result => {
+        loadingOverlay.classList.remove('active');
+        if (result.result === 'success') {
+            showQuoteModal();
+            form.reset();
+            updateProgress();
+        } else {
+            throw new Error(result.error || 'Submission failed');
+        }
+    })
+    .catch(error => {
+        loadingOverlay.classList.remove('active');
+        alert('There was an error submitting your application. Please try again later.');
+        console.error('Submission error:', error);
+    });
 }
 
 async function submitFormWithFallback(jsonData) {
@@ -1550,7 +1552,7 @@ async function submitFormWithFallback(jsonData) {
 }
 
 function submitFormPost(jsonData) {
-    return fetch('https://script.google.com/macros/s/AKfycbxoGaIPsrhSyiFfgrd8uMXoTSRdcx2UA8TKAPfkLZlwS2tK_EOuELUhLJap8iosqzcH/exec', {
+    return fetch('https://script.google.com/macros/s/AKfycbzapKa5Lnh3SOPgosSBTMncOTIfjRPt_SpKOPP6q-JSJMrjTpPIrhJMDmotuyQhqFyt/exec', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -1585,7 +1587,7 @@ function submitFormGet(jsonData) {
             }
         };
 
-        script.src = `https://script.google.com/macros/s/AKfycbxoGaIPsrhSyiFfgrd8uMXoTSRdcx2UA8TKAPfkLZlwS2tK_EOuELUhLJap8iosqzcH/exec?${queryString}&callback=${callbackName}`;
+        script.src = `https://script.google.com/macros/s/AKfycbzapKa5Lnh3SOPgosSBTMncOTIfjRPt_SpKOPP6q-JSJMrjTpPIrhJMDmotuyQhqFyt/exec?${queryString}&callback=${callbackName}`;
         document.body.appendChild(script);
     });
 }
