@@ -1469,27 +1469,23 @@ function submitForm(event) {
     const firstName = form.querySelector('input[name="firstName"]').value;
     const lastName = form.querySelector('input[name="lastName"]').value;
    
-
     if (!isValidEgyptianPhoneNumber(phone)) {
         alert('Please enter a valid Egyptian phone number.');
         return;
     }
-
     if (!isValidEmail(email)) {
         alert('Please enter a valid email address.');
         return;
     }
-
     if (!isValidFirstName(firstName)) {
-        alert('Please enter a valid name (only letters and spaces).');
+        alert('Please enter a valid first name (only letters and spaces).');
         return;
     }
-if (!isValidLastName(lastName)) {
-        alert('Please enter a valid name (only letters and spaces).');
+    if (!isValidLastName(lastName)) {
+        alert('Please enter a valid last name (only letters and spaces).');
         return;
     }
    
-
     // If all validations pass, proceed with form submission
     loadingOverlay.classList.add('active');
     
@@ -1509,12 +1505,12 @@ if (!isValidLastName(lastName)) {
             }
         }
     });
-
+    
     // Handle skills checkboxes specifically
     const selectedSkills = Array.from(document.querySelectorAll('.skill-checkbox:checked'))
         .map(checkbox => checkbox.value);
     jsonData['skills'] = selectedSkills;
-
+    
     // Add committee-specific questions and answers
     const committeeQuestions = document.getElementById('committeeQuestions');
     if (committeeQuestions) {
@@ -1524,38 +1520,74 @@ if (!isValidLastName(lastName)) {
         });
     }
 
-    // Convert jsonData to URL-encoded string
-    const encodedData = Object.keys(jsonData)
-        .map(key => {
-            const value = Array.isArray(jsonData[key]) ? JSON.stringify(jsonData[key]) : jsonData[key];
-            return encodeURIComponent(key) + '=' + encodeURIComponent(value);
+    submitFormWithFallback(jsonData)
+        .then(result => {
+            loadingOverlay.classList.remove('active');
+            if (result.result === 'success') {
+                showQuoteModal();
+                form.reset();
+                updateProgress();
+            } else {
+                throw new Error('Submission failed');
+            }
         })
-        .join('&');
-
-    // Create a script element for JSONP
-    const script = document.createElement('script');
-    script.src = `https://script.google.com/macros/s/AKfycbygXTvy53hB1gpvChV2Y-0YiTgqiFwnNJ6zkKuv-nxdIG5PTRsxxCyBNesE-yYWDeGz/exec?${encodedData}&callback=formSubmitCallback`;
-    
-    // Define the callback function
-   window.formSubmitCallback = function(response) {
-        loadingOverlay.classList.remove('active');
-        if (response.result === 'success') {
-            showQuoteModal();
-            form.reset();
-            updateProgress();
-        } else {
+        .catch(error => {
+            loadingOverlay.classList.remove('active');
             alert('There was an error submitting your application. Please try again later.');
-            console.error('Submission error:', response.error);
+            console.error('Submission error:', error);
+        });
+}
+
+async function submitFormWithFallback(jsonData) {
+    try {
+        // First, try POST request
+        return await submitFormPost(jsonData);
+    } catch (error) {
+        console.error('POST request failed, falling back to GET (JSONP):', error);
+        // If POST fails, try GET (JSONP) as fallback
+        return await submitFormGet(jsonData);
+    }
+}
+
+function submitFormPost(jsonData) {
+    return fetch('https://script.google.com/macros/s/AKfycbygXTvy53hB1gpvChV2Y-0YiTgqiFwnNJ6zkKuv-nxdIG5PTRsxxCyBNesE-yYWDeGz/exec', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(jsonData)
+    })
+    .then(response => response.json())
+    .then(result => {
+        if (result.result === 'success') {
+            return result;
+        } else {
+            throw new Error(result.error || 'Submission failed');
         }
-        // Remove the script element
-        document.body.removeChild(script);
-        // Remove the callback function
-        delete window.formSubmitCallback;
-    };
+    });
+}
 
+function submitFormGet(jsonData) {
+    return new Promise((resolve, reject) => {
+        const script = document.createElement('script');
+        const callbackName = 'jsonpCallback_' + Math.round(100000 * Math.random());
+        const queryString = Object.keys(jsonData)
+            .map(key => `${encodeURIComponent(key)}=${encodeURIComponent(JSON.stringify(jsonData[key]))}`)
+            .join('&');
+        
+        window[callbackName] = function(result) {
+            delete window[callbackName];
+            document.body.removeChild(script);
+            if (result.result === 'success') {
+                resolve(result);
+            } else {
+                reject(new Error(result.error || 'Submission failed'));
+            }
+        };
 
-    // Append the script to the document to send the request
-    document.body.appendChild(script);
+        script.src = `https://script.google.com/macros/s/AKfycbygXTvy53hB1gpvChV2Y-0YiTgqiFwnNJ6zkKuv-nxdIG5PTRsxxCyBNesE-yYWDeGz/exec?${queryString}&callback=${callbackName}`;
+        document.body.appendChild(script);
+    });
 }
 // Make sure this event listener is present
 document.addEventListener('DOMContentLoaded', function() {
@@ -1570,6 +1602,15 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 
+function handleSubmissionResult(result) {
+  if (result.result === 'success') {
+    showQuoteModal();
+    form.reset();
+    updateProgress();
+  } else {
+    throw new Error('Submission failed');
+  }
+}
 // Sharing functions with actual application URL
 function shareWhatsApp() {
     const text = encodeURIComponent("🌟 Join Enactus Menoufia and make a difference! 🌟\nApply now: https://galaxythereal.github.io/enactus/");
