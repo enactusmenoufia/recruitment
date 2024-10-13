@@ -716,7 +716,18 @@ input[type="checkbox"] {
             background: var(--bg-blue-light);
             border-color: var(--primary-blue);
         }
+.fallback-submit {
+    margin-left: 10px;
+    padding: 10px 20px;
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    cursor: pointer;
+}
 
+.fallback-submit:hover {
+    background-color: #e0e0e0;
+}
         /* Enhanced Social Media Section */
         .social-links {
             display: grid;
@@ -1033,7 +1044,9 @@ input[type="checkbox"] {
     <option value="Vet. Medicine">Vet. Medicine</option>
     <option value="other">Other</option>
 </select>
-
+<div id="loadingOverlay" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); justify-content: center; align-items: center; z-index: 1000;">
+    <div style="color: white; font-size: 24px;">Loading...</div>
+</div>
                     </div>
                     <div class="form-group">
                         <label for="otherFaculty">Other Faculty <span class="optional">(Optional)</span></label>
@@ -1456,11 +1469,56 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 });
+// Add these functions to your existing JavaScript
+function showLoading() {
+    const loadingOverlay = document.getElementById('loadingOverlay');
+    loadingOverlay.style.display = 'flex';
+}
 
-// Update the form submission function to handle multiple skills correctly
+function hideLoading() {
+    const loadingOverlay = document.getElementById('loadingOverlay');
+    loadingOverlay.style.display = 'none';
+}
+
+function showSuccessMessage() {
+    const successMessage = document.createElement('div');
+    successMessage.textContent = 'Form submitted successfully!';
+    successMessage.style.cssText = `
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: #4CAF50;
+        color: white;
+        padding: 20px;
+        border-radius: 5px;
+        z-index: 1000;
+    `;
+    document.body.appendChild(successMessage);
+    return successMessage;
+}
+
+function redirectToGoogleForm() {
+    // Replace this URL with your actual Google Form URL
+    const googleFormUrl = 'https://forms.gle/your-google-form-url';
+    window.open(googleFormUrl, '_blank');
+}
+
+// Modify your existing submitForm function
 function submitForm(event) {
     event.preventDefault();
     const form = event.target;
+    
+    showLoading();
+    
+    // Create a timeout for the submission
+    const submissionTimeout = setTimeout(() => {
+        hideLoading();
+        if (confirm("The form submission is taking longer than expected. Would you like to submit via our backup Google Form instead?")) {
+            redirectToGoogleForm();
+        }
+    }, 10000); // 10 seconds timeout
+   
     const loadingOverlay = document.getElementById('loadingOverlay');
     
     // Perform additional validations
@@ -1538,13 +1596,22 @@ if (!isValidLastName(lastName)) {
     
     // Define the callback function
    window.formSubmitCallback = function(response) {
-        loadingOverlay.classList.remove('active');
+        clearTimeout(submissionTimeout);
+        hideLoading();
         if (response.result === 'success') {
-            showQuoteModal();
+            const successMsg = showSuccessMessage();
+            setTimeout(() => {
+                document.body.removeChild(successMsg);
+                showQuoteModal();
+            }, 2000);
             form.reset();
             updateProgress();
         } else {
-            alert('There was an error submitting your application. Please try again later.');
+            if (confirm("There was an error submitting your application. Would you like to use our backup Google Form instead?")) {
+                redirectToGoogleForm();
+            } else {
+                alert('Please try submitting your application again later.');
+            }
             console.error('Submission error:', response.error);
         }
         // Remove the script element
@@ -1569,6 +1636,19 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 });
+function addFallbackButton() {
+    const form = document.getElementById('recruitmentForm');
+    const submitButton = form.querySelector('button[type="submit"]');
+    const fallbackButton = document.createElement('button');
+    fallbackButton.type = 'button';
+    fallbackButton.textContent = 'Submit via Google Form';
+    fallbackButton.className = 'fallback-submit';
+    fallbackButton.onclick = redirectToGoogleForm;
+    submitButton.parentNode.insertBefore(fallbackButton, submitButton.nextSibling);
+}
+
+// Call this function when the DOM is loaded
+document.addEventListener('DOMContentLoaded', addFallbackButton);
 
 // Sharing functions with actual application URL
 function shareWhatsApp() {
