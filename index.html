@@ -1341,31 +1341,26 @@ function showCommitteeQuestions() {
 }
 
 document.getElementById('preferredCommittee').addEventListener('change', showCommitteeQuestions);
-async function submitFormWithRetry(jsonData, maxRetries = 5) {
+async function submitFormWithRetry(formData, maxRetries = 5) {
+    const url = 'https://script.google.com/macros/s/AKfycbxlyOfcIcfc6-v0u78vfaVXfEoanlqx6BhvM7Crh7kXULjHbw9nRlyL1NLp4OgEjvas/exec';
+
     for (let attempt = 0; attempt < maxRetries; attempt++) {
         try {
-            const response = await fetch('https://script.google.com/macros/s/AKfycbxlyOfcIcfc6-v0u78vfaVXfEoanlqx6BhvM7Crh7kXULjHbw9nRlyL1NLp4OgEjvas/exec', {
+            const response = await fetch(url, {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(jsonData)
+                mode: 'no-cors', // This is important for CORS issues
+                body: formData
             });
 
-            if (response.ok) {
-                const result = await response.json();
-                if (result.result === 'success') {
-                    return result;
-                }
-            }
-            throw new Error('Submission failed');
+            // Since mode is 'no-cors', we can't read the response
+            // We'll assume success if there's no error
+            return { result: 'success' };
         } catch (error) {
             if (attempt === maxRetries - 1) throw error;
             await new Promise(resolve => setTimeout(resolve, Math.pow(2, attempt) * 1000));
         }
     }
 }
-
 // Add the missing animateStats function
 function animateStats() {
     const stats = document.querySelectorAll('.stat-number');
@@ -1412,10 +1407,7 @@ function isValidLastName(name) {
 }
 
 
-// Add event listeners for real-time validation
-document.addEventListener('DOMContentLoaded', function() {
-    const form = document.getElementById('recruitmentForm');
-    
+
     // Phone number validation
     const phoneInput = form.querySelector('input[name="phone"]');
     phoneInput.addEventListener('input', function() {
@@ -1463,12 +1455,11 @@ function submitForm(event) {
     const form = event.target;
     const loadingOverlay = document.getElementById('loadingOverlay');
     
-    // Perform additional validations
+    // Perform validations
     const phone = form.querySelector('input[name="phone"]').value;
     const email = form.querySelector('input[name="email"]').value;
     const firstName = form.querySelector('input[name="firstName"]').value;
     const lastName = form.querySelector('input[name="lastName"]').value;
-   
 
     if (!isValidEgyptianPhoneNumber(phone)) {
         alert('Please enter a valid Egyptian phone number.');
@@ -1480,86 +1471,56 @@ function submitForm(event) {
         return;
     }
 
-    if (!isValidFirstName(firstName)) {
-        alert('Please enter a valid name (only letters and spaces).');
+    if (!isValidName(firstName) || !isValidName(lastName)) {
+        alert('Please enter valid names (only letters and spaces).');
         return;
     }
-if (!isValidLastName(lastName)) {
-        alert('Please enter a valid name (only letters and spaces).');
-        return;
-    }
-   
 
-    // If all validations pass, proceed with form submission
     loadingOverlay.classList.add('active');
     
     const formData = new FormData(form);
-    const jsonData = {};
     
-    // Handle regular form fields
-    formData.forEach((value, key) => {
-        if (key !== 'skills') { // Exclude skills from this loop
-            if (jsonData[key]) {
-                if (!Array.isArray(jsonData[key])) {
-                    jsonData[key] = [jsonData[key]];
-                }
-                jsonData[key].push(value);
-            } else {
-                jsonData[key] = value;
-            }
-        }
-    });
-
-    // Handle skills checkboxes specifically
+    // Handle skills checkboxes
     const selectedSkills = Array.from(document.querySelectorAll('.skill-checkbox:checked'))
         .map(checkbox => checkbox.value);
-    jsonData['skills'] = selectedSkills;
+    formData.append('skills', JSON.stringify(selectedSkills));
 
     // Add committee-specific questions and answers
     const committeeQuestions = document.getElementById('committeeQuestions');
     if (committeeQuestions) {
         const questions = committeeQuestions.querySelectorAll('textarea');
         questions.forEach(q => {
-            jsonData[q.name] = q.value;
+            formData.append(q.name, q.value);
         });
     }
 
-    // Convert jsonData to URL-encoded string
-    const encodedData = Object.keys(jsonData)
-        .map(key => {
-            const value = Array.isArray(jsonData[key]) ? JSON.stringify(jsonData[key]) : jsonData[key];
-            return encodeURIComponent(key) + '=' + encodeURIComponent(value);
+    submitFormWithRetry(formData)
+        .then(response => {
+            loadingOverlay.classList.remove('active');
+            if (response.result === 'success') {
+                showQuoteModal();
+                form.reset();
+                updateProgress();
+            } else {
+                alert('There was an error submitting your application. Please try again later.');
+                console.error('Submission error:', response.error);
+            }
         })
-        .join('&');
-
-    // Create a script element for JSONP
-    const script = document.createElement('script');
-    script.src = `https://script.google.com/macros/s/AKfycbxlyOfcIcfc6-v0u78vfaVXfEoanlqx6BhvM7Crh7kXULjHbw9nRlyL1NLp4OgEjvas/exec?${encodedData}&callback=formSubmitCallback`;
-    
-    // Define the callback function
-   window.formSubmitCallback = function(response) {
-        loadingOverlay.classList.remove('active');
-        if (response.result === 'success') {
-            showQuoteModal();
-            form.reset();
-            updateProgress();
-        } else {
+        .catch(error => {
+            loadingOverlay.classList.remove('active');
             alert('There was an error submitting your application. Please try again later.');
-            console.error('Submission error:', response.error);
-        }
-        // Remove the script element
-        document.body.removeChild(script);
-        // Remove the callback function
-        delete window.formSubmitCallback;
-    };
-
-
-    // Append the script to the document to send the request
-    document.body.appendChild(script);
+            console.error('Submission error:', error);
+        });
 }
+
 // Make sure this event listener is present
 document.addEventListener('DOMContentLoaded', function() {
-    document.getElementById('recruitmentForm').addEventListener('submit', submitForm);
+    const form = document.getElementById('recruitmentForm');
+    if (form) {
+        form.addEventListener('submit', submitForm);
+    } else {
+        console.error('Form with ID "recruitmentForm" not found');
+    }
     
     // Add event listener for closing quote modal
     const closeQuoteButton = document.querySelector('.close-quote');
@@ -1569,7 +1530,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 });
-
 // Sharing functions with actual application URL
 function shareWhatsApp() {
     const text = encodeURIComponent("🌟 Join Enactus Menoufia and make a difference! 🌟\nApply now: https://galaxythereal.github.io/enactus/");
