@@ -1923,7 +1923,8 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelector('.close-quote').addEventListener('click', () => {
         document.querySelector('.quote-modal').style.display = 'none'; // Hide the modal
     });
-}
+}); // <-- Missing closing parenthesis added here
+
 // Function to share the quote on different platforms
 function shareQuote(platform) {
     const quote = document.querySelector('.quote-text').textContent;
@@ -1963,6 +1964,7 @@ window.formSubmitCallback = function(response) {
     document.body.removeChild(script);
     delete window.formSubmitCallback;
 };
+
 </script>
 <!-- Add this right before the closing body tag -->
 <div class="quote-modal" style="display: none;">
