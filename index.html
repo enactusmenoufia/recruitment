@@ -1346,7 +1346,7 @@ document.getElementById('preferredCommittee').addEventListener('change', showCom
 async function submitFormWithRetry(jsonData, maxRetries = 5) {
     for (let attempt = 0; attempt < maxRetries; attempt++) {
         try {
-            const response = await fetch('https://script.google.com/macros/s/AKfycbygXTvy53hB1gpvChV2Y-0YiTgqiFwnNJ6zkKuv-nxdIG5PTRsxxCyBNesE-yYWDeGz/exec', {
+            const response = await fetch('https://script.google.com/macros/s/AKfycbxE0Mukp1Ruw1fgn5rXqqTLwDpCgddLaWIB7bn2hEIdu6PgPf7wWj_5DSy-WHeeFOAX/exec', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -1531,12 +1531,7 @@ async function submitForm(event) {
             // Optionally, you can implement a mechanism to retry later or log the error
         });
 
-    } catch (error) {
-        console.error('Error submitting form:', error);
-        alert('There was an error submitting your application. Please try again later.');
-    } finally {
-        loadingOverlay.classList.remove('active');
-    }
+    } 
 }
 // Make sure this event listener is present
 document.addEventListener('DOMContentLoaded', function() {
