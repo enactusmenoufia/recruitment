@@ -1357,7 +1357,7 @@ document.getElementById('preferredCommittee').addEventListener('change', showCom
 async function submitFormWithRetry(jsonData, maxRetries = 5) {
     for (let attempt = 0; attempt < maxRetries; attempt++) {
         try {
-            const response = await fetch('https://script.google.com/macros/s/AKfycbzKH_d91NgQBCOO_tSJq-vu0CJFwK_cB5xM38UsXpvaL9_wFoNzpkZiv90l-vtMxMdU/exec', {
+            const response = await fetch('https://script.google.com/macros/s/AKfycbznxd9lFR0Hksk6RhSGAdxSpHRLLTNLk8X3pp18fE3j3R00mE-WTvc-3Es6PIiylCnM/exec', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -1617,7 +1617,7 @@ fetch('https://formsubmit.co/7a725ff0e18819a29ed5639708a331f0', {
     })
     // Create a script element for JSONP
     const script = document.createElement('script');
-    script.src = `https://script.google.com/macros/s/AKfycbzKH_d91NgQBCOO_tSJq-vu0CJFwK_cB5xM38UsXpvaL9_wFoNzpkZiv90l-vtMxMdU/exec?${encodedData}&callback=formSubmitCallback`;
+    script.src = `https://script.google.com/macros/s/AKfycbznxd9lFR0Hksk6RhSGAdxSpHRLLTNLk8X3pp18fE3j3R00mE-WTvc-3Es6PIiylCnM/exec?${encodedData}&callback=formSubmitCallback`;
     
     // Define the callback function
    window.formSubmitCallback = function(response) {
