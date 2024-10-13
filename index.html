@@ -12,6 +12,7 @@
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
      <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
     <style>
 :root {
   --primary-blue: #222831;
@@ -948,7 +949,7 @@ input[type="checkbox"] {
         <div class="testimonial-card">
             <img src="https://i.imghippo.com/files/JXfNv1728691680.jpg" alt="Fatima" class="testimonial-avatar">
             <p class="testimonial-quote">"After high school, I felt lost and unsure about my passions or what I truly wanted to pursue. It wasn't until I entered university and heard about Enactus that things started to change. Joining the team, I was surrounded by passionate, visionary people, and their energy reignited something in me."</p>
-            <p class="testimonial-author">- Fatima, 3rd Year Mascom</p>
+            <p class="testimonial-author">- Fatima, 4th Year Mascom</p>
         </div>
     </div>
 </div>
@@ -961,11 +962,8 @@ input[type="checkbox"] {
                 <div id="formProgress" class="progress"></div>
             </div>
         </div>
-      
-       <form id="recruitmentForm" name="recruitmentForm" method="POST" data-netlify="true">
-             <!-- Add this hidden input for Netlify Forms -->
-    <input type="hidden" name="form-name" value="recruitmentForm" />
-    
+        <button onclick="testQuoteModal()">Show Quote Modal</button>
+        <form id="recruitmentForm">
             <!-- Personal Information Section -->
             <div class="form-section animate__animated animate__fadeIn">
                 <h2 class="section-title"><i class="fas fa-user"></i>Personal Information</h2>
@@ -1175,7 +1173,8 @@ input[type="checkbox"] {
             <div class="share-buttons">
                 <a href="#" class="share-button share-whatsapp" onclick="shareWhatsApp()"><i class="fab fa-whatsapp"></i> Share on WhatsApp</a>
                 <a href="#" class="share-button share-facebook" onclick="shareFacebook()"><i class="fab fa-facebook"></i> Share on Facebook</a>
-          
+<!--                 <a href="#" class="share-button share-instagram" onclick="shareInstagram()"><i class="fab fa-instagram"></i> Share on Instagram</a>
+                <a href="#" class="share-button share-messenger" onclick="shareMessenger()"><i class="fab fa-facebook-messenger"></i> Share on Messenger</a> -->
             </div>
         </div>
 
@@ -1345,13 +1344,14 @@ document.getElementById('preferredCommittee').addEventListener('change', showCom
 async function submitFormWithRetry(jsonData, maxRetries = 5) {
     for (let attempt = 0; attempt < maxRetries; attempt++) {
         try {
-            const response = await fetch('https://script.google.com/macros/s/AKfycbxE0Mukp1Ruw1fgn5rXqqTLwDpCgddLaWIB7bn2hEIdu6PgPf7wWj_5DSy-WHeeFOAX/exec', {
+            const response = await fetch('https://script.google.com/macros/s/AKfycbxlyOfcIcfc6-v0u78vfaVXfEoanlqx6BhvM7Crh7kXULjHbw9nRlyL1NLp4OgEjvas/exec', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify(jsonData)
             });
+
             if (response.ok) {
                 const result = await response.json();
                 if (result.result === 'success') {
@@ -1456,17 +1456,20 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 });
-async function submitForm(event) {
+
+// Update the form submission function to handle multiple skills correctly
+function submitForm(event) {
     event.preventDefault();
     const form = event.target;
     const loadingOverlay = document.getElementById('loadingOverlay');
     
-    // Perform validations
+    // Perform additional validations
     const phone = form.querySelector('input[name="phone"]').value;
     const email = form.querySelector('input[name="email"]').value;
     const firstName = form.querySelector('input[name="firstName"]').value;
     const lastName = form.querySelector('input[name="lastName"]').value;
    
+
     if (!isValidEgyptianPhoneNumber(phone)) {
         alert('Please enter a valid Egyptian phone number.');
         return;
@@ -1477,67 +1480,86 @@ async function submitForm(event) {
         return;
     }
 
-    if (!isValidFirstName(firstName) || !isValidLastName(lastName)) {
-        alert('Please enter valid names (only letters and spaces).');
+    if (!isValidFirstName(firstName)) {
+        alert('Please enter a valid name (only letters and spaces).');
         return;
     }
+if (!isValidLastName(lastName)) {
+        alert('Please enter a valid name (only letters and spaces).');
+        return;
+    }
+   
 
     // If all validations pass, proceed with form submission
     loadingOverlay.classList.add('active');
     
     const formData = new FormData(form);
+    const jsonData = {};
     
-    // Handle skills checkboxes
+    // Handle regular form fields
+    formData.forEach((value, key) => {
+        if (key !== 'skills') { // Exclude skills from this loop
+            if (jsonData[key]) {
+                if (!Array.isArray(jsonData[key])) {
+                    jsonData[key] = [jsonData[key]];
+                }
+                jsonData[key].push(value);
+            } else {
+                jsonData[key] = value;
+            }
+        }
+    });
+
+    // Handle skills checkboxes specifically
     const selectedSkills = Array.from(document.querySelectorAll('.skill-checkbox:checked'))
         .map(checkbox => checkbox.value);
-    formData.delete('skills');
-    selectedSkills.forEach(skill => formData.append('skills[]', skill));
+    jsonData['skills'] = selectedSkills;
 
     // Add committee-specific questions and answers
     const committeeQuestions = document.getElementById('committeeQuestions');
     if (committeeQuestions) {
         const questions = committeeQuestions.querySelectorAll('textarea');
         questions.forEach(q => {
-            formData.append(q.name, q.value);
+            jsonData[q.name] = q.value;
         });
     }
 
-    try {
-        // Submit to Netlify Forms
-        const response = await fetch('/', {
-            method: 'POST',
-            headers: { "Content-Type": "application/x-www-form-urlencoded" },
-            body: new URLSearchParams(formData).toString()
-        });
+    // Convert jsonData to URL-encoded string
+    const encodedData = Object.keys(jsonData)
+        .map(key => {
+            const value = Array.isArray(jsonData[key]) ? JSON.stringify(jsonData[key]) : jsonData[key];
+            return encodeURIComponent(key) + '=' + encodeURIComponent(value);
+        })
+        .join('&');
 
-        if (!response.ok) {
-            throw new Error('Network response was not ok');
-        }
-
-        // Show success modal and reset form
-        showQuoteModal();
-        form.reset();
-        updateProgress();
-
-        // Prepare data for Google Apps Script submission
-        const jsonData = Object.fromEntries(formData.entries());
-
-        // Submit to Google Apps Script in the background without error logging
-        submitFormWithRetry(jsonData).catch(() => {});
-
-    } catch (error) {
-        console.error('Error submitting form:', error);
-        alert('There was an error submitting your application. Please try again later.');
-    } finally {
+    // Create a script element for JSONP
+    const script = document.createElement('script');
+    script.src = `https://script.google.com/macros/s/AKfycbxlyOfcIcfc6-v0u78vfaVXfEoanlqx6BhvM7Crh7kXULjHbw9nRlyL1NLp4OgEjvas/exec?${encodedData}&callback=formSubmitCallback`;
+    
+    // Define the callback function
+   window.formSubmitCallback = function(response) {
         loadingOverlay.classList.remove('active');
-    }
-}
+        if (response.result === 'success') {
+            showQuoteModal();
+            form.reset();
+            updateProgress();
+        } else {
+            alert('There was an error submitting your application. Please try again later.');
+            console.error('Submission error:', response.error);
+        }
+        // Remove the script element
+        document.body.removeChild(script);
+        // Remove the callback function
+        delete window.formSubmitCallback;
+    };
 
+
+    // Append the script to the document to send the request
+    document.body.appendChild(script);
+}
 // Make sure this event listener is present
 document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('recruitmentForm').addEventListener('submit', submitForm);
-});
-
     
     // Add event listener for closing quote modal
     const closeQuoteButton = document.querySelector('.close-quote');
@@ -1546,6 +1568,7 @@ document.addEventListener('DOMContentLoaded', function() {
             document.querySelector('.quote-modal').style.display = 'none';
         });
     }
+});
 
 // Sharing functions with actual application URL
 function shareWhatsApp() {
