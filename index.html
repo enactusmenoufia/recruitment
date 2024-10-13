@@ -1583,17 +1583,29 @@ if (!isValidLastName(lastName)) {
     // Add timestamp
     jsonData['timestamp'] = firebase.firestore.FieldValue.serverTimestamp();
 
-    // Submit to Firebase
-    db.collection("recruitmentForms").add(jsonData)
+db.collection("recruitmentForms").add(jsonData)
         .then((docRef) => {
             hideLoading();
             const successMsg = showSuccessMessage();
+            
+            // Disable all form inputs
+            Array.from(form.elements).forEach(element => {
+                element.disabled = true;
+            });
+
             setTimeout(() => {
                 document.body.removeChild(successMsg);
+                
+                // Re-enable and reset the form
+                Array.from(form.elements).forEach(element => {
+                    element.disabled = false;
+                });
+                form.reset();
+                updateProgress();
+
+                // Show the quote modal
                 showQuoteModal();
-            }, 2000);
-            form.reset();
-            updateProgress();
+            }, 30000); // 30 seconds
         })
         .catch((error) => {
             hideLoading();
