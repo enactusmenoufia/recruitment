@@ -1584,7 +1584,6 @@ function submitForm(event) {
     
     showLoading();
     
-   
     const loadingOverlay = document.getElementById('loadingOverlay');
     
     // Perform additional validations
@@ -1593,27 +1592,23 @@ function submitForm(event) {
     const firstName = form.querySelector('input[name="firstName"]').value;
     const lastName = form.querySelector('input[name="lastName"]').value;
    
-
     if (!isValidEgyptianPhoneNumber(phone)) {
         alert('Please enter a valid Egyptian phone number.');
         return;
     }
-
     if (!isValidEmail(email)) {
         alert('Please enter a valid email address.');
         return;
     }
-
     if (!isValidFirstName(firstName)) {
         alert('Please enter a valid name (only letters and spaces).');
         return;
     }
-if (!isValidLastName(lastName)) {
+    if (!isValidLastName(lastName)) {
         alert('Please enter a valid name (only letters and spaces).');
         return;
     }
    
-
     // If all validations pass, proceed with form submission
     loadingOverlay.classList.add('active');
     
@@ -1627,7 +1622,6 @@ if (!isValidLastName(lastName)) {
         }
     });
 
-    // Handle skills checkboxes specifically
     // Handle skills checkboxes
     const selectedSkills = Array.from(document.querySelectorAll('.skill-checkbox:checked'))
         .map(checkbox => checkbox.value);
@@ -1641,11 +1635,16 @@ if (!isValidLastName(lastName)) {
             jsonData[q.name] = q.value;
         });
     }
-    // Add timestamp
-    jsonData['timestamp'] = firebase.firestore.FieldValue.serverTimestamp();
 
- db.collection("recruitmentForms").add(jsonData)
-        .then((docRef) => {
+    // Add timestamp
+    jsonData['timestamp'] = firebase.database.ServerValue.TIMESTAMP;
+
+    // Get a reference to the database
+    const database = firebase.database();
+
+    // Push data to a 'recruitmentForms' node
+    database.ref('recruitmentForms').push(jsonData)
+        .then((ref) => {
             hideLoading();
             const successMsg = showSuccessMessage();
             setTimeout(() => {
