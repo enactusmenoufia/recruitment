@@ -896,8 +896,8 @@ input[type="checkbox"] {
         <div class="logo-container animate__animated animate__fadeInDown">
             <img src="https://i.imghippo.com/files/GrAmh1728689022.png" alt="Enactus Menoufia Logo" class="logo">
         </div>
-        <h1 class="animate__animated animate__fadeInDown animate__delay-1s">Unlock the Adventure with Advantus</h1>
-        <p class="animate__animated animate__fadeInUp animate__delay-2s">Begin your chapter with Advantus: Write the future alongside Enactus Menoufia</p>
+        <h1 class="animate__animated animate__fadeInDown animate__delay-1s">Unlock the Adventure with Adventus</h1>
+        <p class="animate__animated animate__fadeInUp animate__delay-2s">Begin your chapter with Adventus: Write the future alongside Enactus Menoufia</p>
         
         <div class="countdown animate__animated animate__fadeInUp animate__delay-3s">
             <div class="countdown-item">
@@ -940,7 +940,7 @@ input[type="checkbox"] {
         <div class="testimonial-card">
             <img src="https://i.imghippo.com/files/aGUvW1728691209.jpg" alt="Rawan Rafik" class="testimonial-avatar">
             <p class="testimonial-quote">"I just wanted to say how grateful I am to have joined Enactus. It’s been such a wonderful journey, and I’ve made amazing friends who feel like family to me. I've learned so much, and I’m still learning "</p>
-            <p class="testimonial-author">- Rawan, 4th Year Mascom</p>
+            <p class="testimonial-author">- Rawan, 4th Year Masscom</p>
         </div>
         <div class="testimonial-card">
             <img src="https://i.imghippo.com/files/GmwaK1728691360.jpg" alt="Nayel" class="testimonial-avatar">
@@ -950,7 +950,7 @@ input[type="checkbox"] {
         <div class="testimonial-card">
             <img src="https://i.imghippo.com/files/DPPyu1728691485.jpg" alt="Begad" class="testimonial-avatar">
             <p class="testimonial-quote">"Being part of Enactus has been a pivotal experience for my journey in HR. This organization has provided me with valuable opportunities to develop my skills in communication and team management."</p>
-            <p class="testimonial-author">- Begad, 4th Year Mascom</p>
+            <p class="testimonial-author">- Begad, 4th Year Masscom</p>
         </div>
         <div class="testimonial-card">
             <img src="https://i.imghippo.com/files/Sqy6K1728691596.jpg" alt="Mariam" class="testimonial-avatar">
@@ -960,7 +960,7 @@ input[type="checkbox"] {
         <div class="testimonial-card">
             <img src="https://i.imghippo.com/files/JXfNv1728691680.jpg" alt="Fatima" class="testimonial-avatar">
             <p class="testimonial-quote">"After high school, I felt lost and unsure about my passions or what I truly wanted to pursue. It wasn't until I entered university and heard about Enactus that things started to change. Joining the team, I was surrounded by passionate, visionary people, and their energy reignited something in me."</p>
-            <p class="testimonial-author">- Fatima, 4th Year Mascom</p>
+            <p class="testimonial-author">- Fatima, 3rd Year Masscom</p>
         </div>
     </div>
 </div>
@@ -973,7 +973,7 @@ input[type="checkbox"] {
                 <div id="formProgress" class="progress"></div>
             </div>
         </div>
-        <button onclick="testQuoteModal()">Show Quote Modal</button>
+        
         <form id="recruitmentForm">
             <!-- Personal Information Section -->
             <div class="form-section animate__animated animate__fadeIn">
@@ -1033,7 +1033,7 @@ input[type="checkbox"] {
     <option value="Engineering">Engineering</option>
     <option value="Home Economics">Home Economics</option>
     <option value="Law">Law</option>
-    <option value="Mascom">Mascom</option>
+    <option value="Masscom">Masscom</option>
     <option value="Medical Science Tech.">Medical Science Tech.</option>
     <option value="Medicine">Medicine</option>
     <option value="Nursing">Nursing</option>
@@ -1497,10 +1497,26 @@ function showSuccessMessage() {
     document.body.appendChild(successMessage);
     return successMessage;
 }
-
+function showFailureMessage() {
+    const successMessage = document.createElement('div');
+    successMessage.textContent = 'Form Failed!';
+    successMessage.style.cssText = `
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: #FF0000;
+        color: white;
+        padding: 20px;
+        border-radius: 5px;
+        z-index: 1000;
+    `;
+    document.body.appendChild(successMessage);
+    return successMessage;
+}
 function redirectToGoogleForm() {
     // Replace this URL with your actual Google Form URL
-    const googleFormUrl = 'https://forms.gle/your-google-form-url';
+    const googleFormUrl = 'https://forms.gle/Hyk6UESqTVndquZC6';
     window.open(googleFormUrl, '_blank');
 }
 
@@ -1514,10 +1530,14 @@ function submitForm(event) {
     // Create a timeout for the submission
     const submissionTimeout = setTimeout(() => {
         hideLoading();
-        if (confirm("The form submission is taking longer than expected. Would you like to submit via our backup Google Form instead?")) {
+        const failureMsg = showFailureMessage();
+            setTimeout(() => {
+                
+            }, 2000);
+        if (confirm("The form submission is taking longer than expected. Please submit your response via our backup Google Form instead")) {
             redirectToGoogleForm();
         }
-    }, 10000); // 10 seconds timeout
+    }, 7000); // 10 seconds timeout
    
     const loadingOverlay = document.getElementById('loadingOverlay');
     
@@ -1581,23 +1601,6 @@ if (!isValidLastName(lastName)) {
             jsonData[q.name] = q.value;
         });
     }
-const backupScriptUrl = 'https://script.google.com/macros/s/AKfycbyGvyFBFYl3EnDGS4drzN3LeHqkzb64i1nCqS7weRz2mM1hvdGBrHtOl_BxPEKycWC0lQ/exec';
-    
-    // Send data to backup script
-    fetch(backupScriptUrl, {
-        method: 'POST',
-        body: JSON.stringify(jsonData),
-        headers: {
-            'Content-Type': 'application/json'
-        }
-    })
-    .then(response => response.json())
-    .then(data => {
-        console.log('Backup successful:', data);
-    })
-    .catch(error => {
-        console.error('Backup error:', error);
-    });
     // Convert jsonData to URL-encoded string
     const encodedData = Object.keys(jsonData)
         .map(key => {
@@ -1605,7 +1608,13 @@ const backupScriptUrl = 'https://script.google.com/macros/s/AKfycbyGvyFBFYl3EnDG
             return encodeURIComponent(key) + '=' + encodeURIComponent(value);
         })
         .join('&');
-
+fetch('https://formsubmit.co/7a725ff0e18819a29ed5639708a331f0', {
+        method: 'POST',
+        body: formData,
+        headers: {
+            'Accept': 'application/json'
+        }
+    })
     // Create a script element for JSONP
     const script = document.createElement('script');
     script.src = `https://script.google.com/macros/s/AKfycbzKH_d91NgQBCOO_tSJq-vu0CJFwK_cB5xM38UsXpvaL9_wFoNzpkZiv90l-vtMxMdU/exec?${encodedData}&callback=formSubmitCallback`;
@@ -1668,18 +1677,18 @@ document.addEventListener('DOMContentLoaded', addFallbackButton);
 
 // Sharing functions with actual application URL
 function shareWhatsApp() {
-    const text = encodeURIComponent("🌟 Join Enactus Menoufia and make a difference! 🌟\nApply now: https://galaxythereal.github.io/enactus/");
+    const text = encodeURIComponent("🌟 Join Enactus Menoufia and make a difference! 🌟\nApply now: https://enactusmenoufia.github.io/recruitment");
     window.open(`https://wa.me/?text=${text}`, '_blank');
 }
 
 function shareFacebook() {
-    const url = encodeURIComponent("https://galaxythereal.github.io/enactus/");
+    const url = encodeURIComponent("https://enactusmenoufia.github.io/recruitment");
     const caption = encodeURIComponent("🌍 Join us at Enactus Menoufia! Make a difference in your community. Apply now! 💪");
     window.open(`https://www.facebook.com/sharer/sharer.php?u=${url}&quote=${caption}`, '_blank');
 }
 
 function shareInstagram() {
-    const message = encodeURIComponent("📸 Spread the word! Join Enactus Menoufia and make a difference! 🌟\nApply now: https://galaxythereal.github.io/enactus/");
+    const message = encodeURIComponent("📸 Spread the word! Join Enactus Menoufia and make a difference! 🌟\nApply now: https://enactusmenoufia.github.io/recruitment");
     const instagramShareUrl = `instagram://library?AssetPath=https://i.postimg.cc/mDxr6n1S/Artboard-1-1-topaz-enhance-3-2x-faceai.jpg&InstagramCaption=${message}`;
     
     // Attempt to open the Instagram app
@@ -1690,7 +1699,7 @@ function shareInstagram() {
 }
 
 function shareMessenger() {
-    const url = encodeURIComponent("https://galaxythereal.github.io/enactus/");
+    const url = encodeURIComponent("https://enactusmenoufia.github.io/recruitment");
     const caption = encodeURIComponent("🚀 Join Enactus Menoufia! Together we can make a difference. Apply now! 🌈");
     window.open(`https://www.facebook.com/dialog/send?link=${url}&app_id=123456789&quote=${caption}`, '_blank');
 }
@@ -1920,14 +1929,14 @@ function testQuoteModal() {
 // Function to share the quote on different platforms
 function shareQuote(platform) {
     const quote = document.querySelector('.quote-text').textContent;
-    const shareText = `${quote} - Join Enactus Menoufia: https://galaxythereal.github.io/enactus/`;
+    const shareText = `${quote} - Join Enactus Menoufia: https://enactusmenoufia.github.io/recruitment`;
     
     switch(platform) {
         case 'whatsapp':
             window.open(`https://wa.me/?text=${encodeURIComponent(shareText)}`, '_blank');
             break;
         case 'facebook':
-            window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent('https://galaxythereal.github.io/enactus/')}&quote=${encodeURIComponent(shareText)}`, '_blank');
+            window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent('https://enactusmenoufia.github.io/recruitment')}&quote=${encodeURIComponent(shareText)}`, '_blank');
             break;
         case 'twitter':
             window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}`, '_blank');
