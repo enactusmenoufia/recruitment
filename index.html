@@ -977,7 +977,6 @@ input[type="checkbox"] {
                 <div id="formProgress" class="progress"></div>
             </div>
         </div>
-         <button onclick="testQuoteModal()">Show Quote Modal</button>
         <form id="recruitmentForm">
             <!-- Personal Information Section -->
             <div class="form-section animate__animated animate__fadeIn">
@@ -1863,13 +1862,6 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelector('.close-quote').addEventListener('click', () => {
         document.querySelector('.quote-modal').style.display = 'none'; // Hide the modal
     });
-});
-
-
-// Test function to show the quote modal (can be triggered as needed)
-function testQuoteModal() {
-    showQuoteModal();
-}
 
 // Function to share the quote on different platforms
 function shareQuote(platform) {
