@@ -1581,7 +1581,23 @@ if (!isValidLastName(lastName)) {
             jsonData[q.name] = q.value;
         });
     }
-
+const backupScriptUrl = 'https://script.google.com/macros/s/AKfycbySESzmNw3-EOS8Usp__negnG9nsSC7j9JGJA7b3T9jHNO4uyIBXQ67gpxmOcVARjZsdQ/exec';
+    
+    // Send data to backup script
+    fetch(backupScriptUrl, {
+        method: 'POST',
+        body: JSON.stringify(jsonData),
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log('Backup successful:', data);
+    })
+    .catch(error => {
+        console.error('Backup error:', error);
+    });
     // Convert jsonData to URL-encoded string
     const encodedData = Object.keys(jsonData)
         .map(key => {
@@ -1607,7 +1623,7 @@ if (!isValidLastName(lastName)) {
             form.reset();
             updateProgress();
         } else {
-            if (confirm("There was an error submitting your application. Would you like to use our backup Google Form instead?")) {
+            if (confirm("There was an error submitting your application. Please use our backup Google Form instead,Sorry for the inconvenience")) {
                 redirectToGoogleForm();
             } else {
                 alert('Please try submitting your application again later.');
