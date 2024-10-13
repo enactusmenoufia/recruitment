@@ -1583,35 +1583,27 @@ if (!isValidLastName(lastName)) {
     // Add timestamp
     jsonData['timestamp'] = firebase.firestore.FieldValue.serverTimestamp();
 
- // Submit to Firebase
-db.collection("recruitmentForms").add(jsonData)
-    .then((docRef) => {
-        hideLoading();
-        const successMsg = showSuccessMessage();
-        
-        // Show success message for 2 seconds
-        setTimeout(() => {
-            // Remove success message
-            if (successMsg && successMsg.parentNode) {
-                successMsg.parentNode.removeChild(successMsg);
+    // Submit to Firebase
+    db.collection("recruitmentForms").add(jsonData)
+        .then((docRef) => {
+            hideLoading();
+            const successMsg = showSuccessMessage();
+            setTimeout(() => {
+                document.body.removeChild(successMsg);
+                showQuoteModal();
+            }, 2000);
+            form.reset();
+            updateProgress();
+        })
+        .catch((error) => {
+            hideLoading();
+            console.error("Error adding document: ", error);
+            if (confirm("There was an error submitting your application. Would you like to try our backup Google Form instead?")) {
+                redirectToGoogleForm();
+            } else {
+                alert('Please try submitting your application again later.');
             }
-            
-            // Show quote modal
-            showQuoteModal();
-        }, 2000);
-        showQuoteModal();
-        form.reset();
-        updateProgress();
-    })
-    .catch((error) => {
-        hideLoading();
-        console.error("Error adding document: ", error);
-        if (confirm("There was an error submitting your application. Would you like to try our backup Google Form instead?")) {
-            redirectToGoogleForm();
-        } else {
-            alert('Please try submitting your application again later.');
-        }
-    });
+        });
 }
 // Make sure this event listener is present
 document.addEventListener('DOMContentLoaded', function() {
