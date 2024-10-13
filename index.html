@@ -963,7 +963,7 @@ input[type="checkbox"] {
             </div>
         </div>
       
-        <form id="recruitmentForm">
+       <form id="recruitmentForm" name="recruitmentForm" method="POST" data-netlify="true">
              <!-- Add this hidden input for Netlify Forms -->
     <input type="hidden" name="form-name" value="recruitmentForm" />
     
@@ -1353,7 +1353,6 @@ async function submitFormWithRetry(jsonData, maxRetries = 5) {
                 },
                 body: JSON.stringify(jsonData)
             });
-
             if (response.ok) {
                 const result = await response.json();
                 if (result.result === 'success') {
@@ -1458,8 +1457,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 });
-
-// Update the form submission function to handle multiple skills correctly
 async function submitForm(event) {
     event.preventDefault();
     const form = event.target;
@@ -1510,7 +1507,8 @@ async function submitForm(event) {
         // Submit to Netlify Forms
         const response = await fetch('/', {
             method: 'POST',
-            body: formData
+            headers: { "Content-Type": "application/x-www-form-urlencoded" },
+            body: new URLSearchParams(formData).toString()
         });
 
         if (!response.ok) {
@@ -1525,14 +1523,17 @@ async function submitForm(event) {
         // Prepare data for Google Apps Script submission
         const jsonData = Object.fromEntries(formData.entries());
 
-        // Submit to Google Apps Script in the background
-        submitFormWithRetry(jsonData).catch(error => {
-            console.error('Error submitting to Google Apps Script:', error);
-            // Optionally, you can implement a mechanism to retry later or log the error
-        });
+        // Submit to Google Apps Script in the background without error logging
+        submitFormWithRetry(jsonData).catch(() => {});
 
-    } 
+    } catch (error) {
+        console.error('Error submitting form:', error);
+        alert('There was an error submitting your application. Please try again later.');
+    } finally {
+        loadingOverlay.classList.remove('active');
+    }
 }
+
 // Make sure this event listener is present
 document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('recruitmentForm').addEventListener('submit', submitForm);
