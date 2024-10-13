@@ -1373,30 +1373,7 @@ function showCommitteeQuestions() {
 }
 
 document.getElementById('preferredCommittee').addEventListener('change', showCommitteeQuestions);
-async function submitFormWithRetry(jsonData, maxRetries = 5) {
-    for (let attempt = 0; attempt < maxRetries; attempt++) {
-        try {
-            const response = await fetch('https://script.google.com/macros/s/AKfycbxxO-IEgdwx-1oGbn3kK_XOmTJNdSEHn1NIji0Sm7sreTT5a7pyxLxa1ZYhQL2R0k8f/exec', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(jsonData)
-            });
 
-            if (response.ok) {
-                const result = await response.json();
-                if (result.result === 'success') {
-                    return result;
-                }
-            }
-            throw new Error('Submission failed');
-        } catch (error) {
-            if (attempt === maxRetries - 1) throw error;
-            await new Promise(resolve => setTimeout(resolve, Math.pow(2, attempt) * 1000));
-        }
-    }
-}
 
 // Add the missing animateStats function
 function animateStats() {
@@ -1546,17 +1523,6 @@ function submitForm(event) {
     
     showLoading();
     
-    // Create a timeout for the submission
-    const submissionTimeout = setTimeout(() => {
-        hideLoading();
-        const failureMsg = showFailureMessage();
-            setTimeout(() => {
-                
-            }, 2000);
-        if (confirm("The form submission is taking longer than expected. Please submit your response via our backup Google Form instead")) {
-            redirectToGoogleForm();
-        }
-    }, 7000); // 10 seconds timeout
    
     const loadingOverlay = document.getElementById('loadingOverlay');
     
@@ -1651,16 +1617,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 });
-function addFallbackButton() {
-    const form = document.getElementById('recruitmentForm');
-    const submitButton = form.querySelector('button[type="submit"]');
-    const fallbackButton = document.createElement('button');
-    fallbackButton.type = 'button';
-    fallbackButton.textContent = 'Submit via Google Form';
-    fallbackButton.className = 'fallback-submit';
-    fallbackButton.onclick = redirectToGoogleForm;
-    submitButton.parentNode.insertBefore(fallbackButton, submitButton.nextSibling);
-}
 
 // Call this function when the DOM is loaded
 document.addEventListener('DOMContentLoaded', addFallbackButton);
