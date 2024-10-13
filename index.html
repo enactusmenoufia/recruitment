@@ -1848,15 +1848,17 @@ const inspirationalQuotes = [
 
 
 
-function showQuoteModal() {
-    const modal = document.querySelector('.quote-modal');
-    const randomQuote = inspirationalQuotes[Math.floor(Math.random() * inspirationalQuotes.length)];
-    
-    document.querySelector('.quote-text').textContent = randomQuote.text;
-    document.querySelector('.quote-author').textContent = "- " + randomQuote.author;
-    
-    modal.style.display = 'flex'; // Show the modal
-}
+document.addEventListener('DOMContentLoaded', function() {
+    window.showQuoteModal = function() {
+        const modal = document.querySelector('.quote-modal');
+        const randomQuote = inspirationalQuotes[Math.floor(Math.random() * inspirationalQuotes.length)];
+        
+        document.querySelector('.quote-text').textContent = randomQuote.text;
+        document.querySelector('.quote-author').textContent = "- " + randomQuote.author;
+        
+        modal.style.display = 'flex';
+    }
+});
 
 // Event listener for closing the modal
 document.addEventListener('DOMContentLoaded', () => {
