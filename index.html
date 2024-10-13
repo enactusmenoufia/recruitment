@@ -964,6 +964,9 @@ input[type="checkbox"] {
         </div>
       
         <form id="recruitmentForm">
+             <!-- Add this hidden input for Netlify Forms -->
+    <input type="hidden" name="form-name" value="recruitmentForm" />
+    
             <!-- Personal Information Section -->
             <div class="form-section animate__animated animate__fadeIn">
                 <h2 class="section-title"><i class="fas fa-user"></i>Personal Information</h2>
@@ -1457,12 +1460,12 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 // Update the form submission function to handle multiple skills correctly
-function submitForm(event) {
+async function submitForm(event) {
     event.preventDefault();
     const form = event.target;
     const loadingOverlay = document.getElementById('loadingOverlay');
     
-    // Perform additional validations
+    // Perform validations
     const phone = form.querySelector('input[name="phone"]').value;
     const email = form.querySelector('input[name="email"]').value;
     const firstName = form.querySelector('input[name="firstName"]').value;
@@ -1491,7 +1494,8 @@ function submitForm(event) {
     // Handle skills checkboxes
     const selectedSkills = Array.from(document.querySelectorAll('.skill-checkbox:checked'))
         .map(checkbox => checkbox.value);
-    formData.append('skills', JSON.stringify(selectedSkills));
+    formData.delete('skills');
+    selectedSkills.forEach(skill => formData.append('skills[]', skill));
 
     // Add committee-specific questions and answers
     const committeeQuestions = document.getElementById('committeeQuestions');
@@ -1502,33 +1506,38 @@ function submitForm(event) {
         });
     }
 
-    // Send the form data to formsubmit.co
-    fetch('https://formsubmit.co/enactusmenoufiahr@gmail.com', {
-        method: 'POST',
-        body: formData,
-        headers: {
-            'Accept': 'application/json'
-        }
-    })
-    .then(response => response.json())
-    .then(data => {
-        loadingOverlay.classList.remove('active');
-        if (data.success) {
-            showQuoteModal();
-            form.reset();
-            updateProgress();
-        } else {
-            alert('There was an error submitting your application. Please try again later.');
-            console.error('Submission error:', data.message);
-        }
-    })
-    .catch(error => {
-        loadingOverlay.classList.remove('active');
-        alert('There was an error submitting your application. Please try again later.');
-        console.error('Fetch error:', error);
-    });
-}
+    try {
+        // Submit to Netlify Forms
+        const response = await fetch('/', {
+            method: 'POST',
+            body: formData
+        });
 
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+
+        // Show success modal and reset form
+        showQuoteModal();
+        form.reset();
+        updateProgress();
+
+        // Prepare data for Google Apps Script submission
+        const jsonData = Object.fromEntries(formData.entries());
+
+        // Submit to Google Apps Script in the background
+        submitFormWithRetry(jsonData).catch(error => {
+            console.error('Error submitting to Google Apps Script:', error);
+            // Optionally, you can implement a mechanism to retry later or log the error
+        });
+
+    } catch (error) {
+        console.error('Error submitting form:', error);
+        alert('There was an error submitting your application. Please try again later.');
+    } finally {
+        loadingOverlay.classList.remove('active');
+    }
+}
 // Make sure this event listener is present
 document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('recruitmentForm').addEventListener('submit', submitForm);
