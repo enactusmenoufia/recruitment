@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,412 +9,435 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
-     <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
-     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-    <script src= "https://www.gstatic.com/firebasejs/3.7.4/firebase.js"></script>
-<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/3.7.4/firebase.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
 
-<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
     <style>
-:root {
-  --primary-blue: #222831;
-  --secondary-blue: #393e46;
-  --accent-yellow: #ffd369;
-  --success-green: #4caf50;
-  --error-red: #ff6b6b;
-  --bg-white: #ffffff;
-  --bg-light: #f0f0f0;
-  --bg-blue-light: #e3e3e3;
-  --text-primary: #222831;
-  --text-secondary: #393e46;
-  --text-tertiary: #929aab;
-  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.05);
-  --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.05);
-  --shadow-lg: 0 8px 16px rgba(0, 0, 0, 0.05);
-  --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
-  --transition-normal: 300ms cubic-bezier(0.4, 0, 0.2, 1);
-}
-       /* Common styles */
-body {
-    font-family: 'Poppins', sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: var(--bg-light);
-    color: var(--text-primary);
-    line-height: 1.6;
-}
+        :root {
+            --primary-blue: #222831;
+            --secondary-blue: #393e46;
+            --accent-yellow: #ffd369;
+            --success-green: #4caf50;
+            --error-red: #ff6b6b;
+            --bg-white: #ffffff;
+            --bg-light: #f0f0f0;
+            --bg-blue-light: #e3e3e3;
+            --text-primary: #222831;
+            --text-secondary: #393e46;
+            --text-tertiary: #929aab;
+            --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.05);
+            --shadow-lg: 0 8px 16px rgba(0, 0, 0, 0.05);
+            --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-normal: 300ms cubic-bezier(0.4, 0, 0.2, 1);
+        }
 
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 2rem;
-}
-       /* Common styles */
-.header {
-    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://postimg.cc/WDgnLLhZ');
-    background-size: cover;
-    background-position: center;
-    height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    padding: 1rem 0;
-    overflow: hidden;
-}
+        /* Common styles */
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-light);
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
 
-.header::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(0, 0, 0, 0.4);
-    backdrop-filter: blur(5px);
-}
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
 
-.header-content {
-    text-align: center;
-    color: var(--bg-white);
-    z-index: 1;
-    max-width: 800px;
-    width: 90%;
-    padding: 1rem;
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100%;
-}
+        /* Common styles */
+        .header {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://i.postimg.cc/0NHHS9vV/Whats-App-Image-2024-10-21-at-23-46-27-6b35adc9.jpg');
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            padding: 1rem 0;
+            overflow: hidden;
+        }
 
-.logo-container {
-    margin-bottom: 0rem;
-}
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(5px);
+        }
 
-.logo {
-    max-width: 240px;
-    height: auto;
-}
+        .header-content {
+            text-align: center;
+            color: var(--bg-white);
+            z-index: 1;
+            max-width: 800px;
+            width: 90%;
+            padding: 1rem;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+        }
 
-.header h1 {
-    font-size: 2.5rem;
-    font-weight: 700;
-    margin-bottom: 0.5rem;
-    line-height: 1.2;
-    text-shadow: 0 2px 4px rgba(0,0,0,0.3);
-}
+        .logo-container {
+            margin-bottom: 0rem;
+        }
 
-.header p {
-    font-size: 1.1rem;
-    margin-bottom: 1.5rem;
-    font-weight: 400;
-    text-shadow: 0 1px 2px rgba(0,0,0,0.2);
-}
+        .logo {
+            max-width: 240px;
+            height: auto;
+        }
 
-.countdown {
-    display: flex;
-    justify-content: center;
-    gap: 1rem;
-    margin-bottom: 1.5rem;
-}
+        .header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            line-height: 1.2;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
 
-.countdown-item {
-    background-color: rgba(255, 255, 255, 0.1);
-    padding: 0.5rem;
-    border-radius: 8px;
-    min-width: 60px;
-}
+        .header p {
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+            font-weight: 400;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+        }
 
-.countdown-number {
-    font-size: 1.5rem;
-    font-weight: 700;
-}
+        .countdown {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
 
-.countdown-label {
-    font-size: 0.8rem;
-}
+        .countdown-item {
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 0.5rem;
+            border-radius: 8px;
+            min-width: 60px;
+        }
 
-.stats-bar {
-    display: flex;
-    justify-content: space-around;
-    width: 100%;
-    margin-top: 1rem;
-}
+        .countdown-number {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
 
-.stat-item {
-    text-align: center;
-}
+        .countdown-label {
+            font-size: 0.8rem;
+        }
 
-.stat-number {
-    font-size: 1.5rem;
-    font-weight: 700;
-}
+        .stats-bar {
+            display: flex;
+            justify-content: space-around;
+            width: 100%;
+            margin-top: 1rem;
+        }
 
-.stat-label {
-    font-size: 0.8rem;
-}
+        .stat-item {
+            text-align: center;
+        }
 
-@media (max-width: 768px) {
-    .header {
-        background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://i.imghippo.com/files/MqG841728683084.jpg');
-        height: auto;
-        min-height: 100vh;
-        padding: 1rem;
-    }
+        .stat-number {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
 
-    .header-content {
-        padding: 1rem;
-        width: 100%;
-    }
+        .stat-label {
+            font-size: 0.8rem;
+        }
 
-    .logo {
-        max-width: 240px;
-    }
+        @media (max-width: 768px) {
+            .header {
+                background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://i.imghippo.com/files/MqG841728683084.jpg');
+                height: auto;
+                min-height: 100vh;
+                padding: 1rem;
+            }
 
-    .header h1 {
-        font-size: 1.8rem;
-    }
+            .header-content {
+                padding: 1rem;
+                width: 100%;
+            }
 
-    .header p {
-        font-size: 1rem;
-    }
+            .logo {
+                max-width: 240px;
+            }
 
-    .countdown {
-        flex-wrap: wrap;
-        gap: 0.5rem;
-    }
+            .header h1 {
+                font-size: 1.8rem;
+            }
 
-    .countdown-item {
-        min-width: 40px;
-    }
+            .header p {
+                font-size: 1rem;
+            }
 
-    .countdown-number {
-        font-size: 1.2rem;
-    }
+            .countdown {
+                flex-wrap: wrap;
+                gap: 0.5rem;
+            }
 
-    .stats-bar {
-        flex-direction: column;
-        gap: 1rem;
-    }
-}
-    /* Fix sharing section on mobile */
-.share-section {
-    padding: 1.5rem;
-    display: flex;
-    justify-content: center;  /* Centers the content horizontally */
-    align-items: center;      /* Centers the content vertically (if needed) */
-    flex-direction: column;   /* Aligns everything in a column */
-}
+            .countdown-item {
+                min-width: 40px;
+            }
 
-.share-buttons {
-    display: flex;
-    flex-direction: column;   /* Stacks buttons vertically */
-    gap: 2rem;
-    width: 100%;              /* Makes buttons take up the full width of the parent */
-    align-items: center;      /* Horizontally centers the buttons */
-}
+            .countdown-number {
+                font-size: 1.2rem;
+            }
 
-.share-button {
-    display: flex;
-    justify-content: center;  /* Centers the content inside the button */
-    align-items: center;      /* Centers the content vertically inside the button */
-    width: auto;              /* Let the button size adjust automatically */
-    padding: 0.75rem;
-    max-width: 300px;         /* Optional: Set a max width for the buttons */
-    text-align: center;       /* Ensures text is centered within the button */
-}
+            .stats-bar {
+                flex-direction: column;
+                gap: 1rem;
+            }
+        }
 
-    
+        /* Fix sharing section on mobile */
+        .share-section {
+            padding: 1.5rem;
+            display: flex;
+            justify-content: center;
+            /* Centers the content horizontally */
+            align-items: center;
+            /* Centers the content vertically (if needed) */
+            flex-direction: column;
+            /* Aligns everything in a column */
+        }
 
-/* Quote Modal Styles */
-.quote-modal {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(34, 40, 49, 0.9);
-    z-index: 1000;
-    justify-content: center;
-    align-items: center;
-    padding: 0.2rem;
-    backdrop-filter: blur(8px);
-}
+        .share-buttons {
+            display: flex;
+            flex-direction: column;
+            /* Stacks buttons vertically */
+            gap: 2rem;
+            width: 100%;
+            /* Makes buttons take up the full width of the parent */
+            align-items: center;
+            /* Horizontally centers the buttons */
+        }
 
-.quote-content {
-    background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue));
-    border-radius: 20px;
-    padding: 4rem 3rem 3rem;
-    max-width: 90%;
-    width: 600px;
-    text-align: center;
-    color: var(--bg-white);
-    box-shadow: var(--shadow-lg);
-    position: relative;
-    overflow: hidden;
-}
+        .share-button {
+            display: flex;
+            justify-content: center;
+            /* Centers the content inside the button */
+            align-items: center;
+            /* Centers the content vertically inside the button */
+            width: auto;
+            /* Let the button size adjust automatically */
+            padding: 0.75rem;
+            max-width: 300px;
+            /* Optional: Set a max width for the buttons */
+            text-align: center;
+            /* Ensures text is centered within the button */
+        }
 
-.quote-content::before,
-.quote-content::after {
-    content: '"';
-    position: absolute;
-    font-size: 160px;
-    font-family: Georgia, serif;
-    opacity: 0.1;
-    line-height: 1;
-    color: var(--accent-yellow);
-}
 
-.quote-content::before {
-    top: 20px;
-    left: 10px;
-}
 
-.quote-content::after {
-    bottom: 20px;
-    right: 10px;
-    transform: rotate(180deg);
-}
+        /* Quote Modal Styles */
+        .quote-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(34, 40, 49, 0.9);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            padding: 0.2rem;
+            backdrop-filter: blur(8px);
+        }
 
-.quote-text {
-    font-size: 2rem;
-    font-weight: 600;
-    margin-bottom: 2rem;
-    line-height: 1.4;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
-    position: relative;
-    z-index: 1;
-    color: var(--bg-white);
-}
+        .quote-content {
+            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue));
+            border-radius: 20px;
+            padding: 4rem 3rem 3rem;
+            max-width: 90%;
+            width: 600px;
+            text-align: center;
+            color: var(--bg-white);
+            box-shadow: var(--shadow-lg);
+            position: relative;
+            overflow: hidden;
+        }
 
-.quote-author {
-    font-style: italic;
-    margin-bottom: 2.5rem;
-    font-size: 1.3rem;
-    opacity: 0.9;
-    color: var(--accent-yellow);
-}
+        .quote-content::before,
+        .quote-content::after {
+            content: '"';
+            position: absolute;
+            font-size: 160px;
+            font-family: Georgia, serif;
+            opacity: 0.1;
+            line-height: 1;
+            color: var(--accent-yellow);
+        }
 
-.quote-share-buttons {
-    display: flex;
-    justify-content: center;
-    gap: 1rem;
-    margin-top: 2rem;
-    flex-wrap: wrap;
-}
+        .quote-content::before {
+            top: 20px;
+            left: 10px;
+        }
 
-.quote-share-button {
-    padding: 0.8rem 1.2rem;
-    border-radius: 50px;
-    background: rgba(255, 255, 255, 0.2);
-    color: white;
-    border: 2px solid white;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    font-size: 0.9rem;
-}
+        .quote-content::after {
+            bottom: 20px;
+            right: 10px;
+            transform: rotate(180deg);
+        }
 
-.quote-share-button:hover {
-    background: white;
-    color: #3a1c71;
-    transform: translateY(-3px);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-}
+        .quote-text {
+            font-size: 2rem;
+            font-weight: 600;
+            margin-bottom: 2rem;
+            line-height: 1.4;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+            position: relative;
+            z-index: 1;
+            color: var(--bg-white);
+        }
 
-.close-quote {
-    position: absolute;
-    top: 0px;
-    right: 10px;
-    background: rgba(255, 255, 255, 0.2);
-    border: none;
-    color: white;
-    font-size: 1.5rem;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 2;
-}
+        .quote-author {
+            font-style: italic;
+            margin-bottom: 2.5rem;
+            font-size: 1.3rem;
+            opacity: 0.9;
+            color: var(--accent-yellow);
+        }
 
-.close-quote:hover {
-    background: rgba(255, 255, 255, 0.3);
-    transform: rotate(90deg);
-}
+        .quote-share-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
 
-.share-prompt {
-    margin-top: 1rem;
-    font-size: 1.1rem;
-    opacity: 0.8;
-    color: var(--bg-light);
-}
+        .quote-share-button {
+            padding: 0.8rem 1.2rem;
+            border-radius: 50px;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: 2px solid white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-size: 0.9rem;
+        }
 
-@keyframes pulse {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.05); }
-    100% { transform: scale(1); }
-}
+        .quote-share-button:hover {
+            background: white;
+            color: #3a1c71;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
 
-.pulse {
-    animation: pulse 2s infinite;
-}
+        .close-quote {
+            position: absolute;
+            top: 0px;
+            right: 10px;
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 2;
+        }
 
-@media (max-width: 600px) {
-    .quote-content {
-        padding: 3rem 2rem 2rem;
-    }
-    
-    .quote-text {
-        font-size: 1.5rem;
-    }
-    
-    .quote-author {
-        font-size: 1.1rem;
-    }
-    
-    .quote-share-button {
-        padding: 0.6rem 1rem;
-        font-size: 0.8rem;
-    }
+        .close-quote:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: rotate(90deg);
+        }
 
-    .quote-content::before,
-    .quote-content::after {
-        font-size: 120px;
-    }
+        .share-prompt {
+            margin-top: 1rem;
+            font-size: 1.1rem;
+            opacity: 0.8;
+            color: var(--bg-light);
+        }
 
-    .quote-content::before {
-        top: 15px;
-        left: 10px;
-    }
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
 
-    .quote-content::after {
-        bottom: 15px;
-        right: 10px;
-    }
+            50% {
+                transform: scale(1.05);
+            }
 
-    .close-quote {
-        top: 5px;
-        right: 5px;
-        width: 30px;
-        height: 30px;
-        font-size: 1.2rem;
-    }
-}
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+
+        @media (max-width: 600px) {
+            .quote-content {
+                padding: 3rem 2rem 2rem;
+            }
+
+            .quote-text {
+                font-size: 1.5rem;
+            }
+
+            .quote-author {
+                font-size: 1.1rem;
+            }
+
+            .quote-share-button {
+                padding: 0.6rem 1rem;
+                font-size: 0.8rem;
+            }
+
+            .quote-content::before,
+            .quote-content::after {
+                font-size: 120px;
+            }
+
+            .quote-content::before {
+                top: 15px;
+                left: 10px;
+            }
+
+            .quote-content::after {
+                bottom: 15px;
+                right: 10px;
+            }
+
+            .close-quote {
+                top: 5px;
+                right: 5px;
+                width: 30px;
+                height: 30px;
+                font-size: 1.2rem;
+            }
+        }
+
         /* Enhanced Stats Bar */
         .stats-bar {
             display: flex;
@@ -475,54 +499,65 @@ body {
         }
 
         .form-row {
-    display: flex;
-    gap: 2rem;
-    margin-bottom: 1.5rem;
-}
+            display: flex;
+            gap: 2rem;
+            margin-bottom: 1.5rem;
+        }
 
-.form-group {
-    flex: 1;
-    min-width: 200px;
-    margin-right: 1rem;
-    
-}
+        .form-group {
+            flex: 1;
+            min-width: 200px;
+            margin-right: 1rem;
 
-label {
-    display: block;
-    margin-bottom: 0.5rem;
-    font-weight: 500;
-    color: var(--text-secondary);
-}
+        }
 
-input, select, textarea {
-    width: 100%;
-    padding: 0.75rem 1rem;
-    border: 2px solid var(--bg-blue-light);
-    border-radius: 8px;
-    font-size: 1rem;
-    transition: var(--transition-fast);
-    background-color: var(--bg-light);
-    box-sizing: border-box; /* Ensures padding is included in the width calculation */
-}
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--text-secondary);
+        }
 
-input:focus, select:focus, textarea:focus {
-    border-color: var(--primary-blue);
-    outline: none;
-    box-shadow: 0 0 0 4px rgba(26, 115, 232, 0.1);
-}
+        input,
+        select,
+        textarea {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 2px solid var(--bg-blue-light);
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: var(--transition-fast);
+            background-color: var(--bg-light);
+            box-sizing: border-box;
+            /* Ensures padding is included in the width calculation */
+        }
 
-/* Ensure consistent height between input and select elements */
-input, select {
-    height: 48px; /* Adjust to the desired height */
-}
+        input:focus,
+        select:focus,
+        textarea:focus {
+            border-color: var(--primary-blue);
+            outline: none;
+            box-shadow: 0 0 0 4px rgba(26, 115, 232, 0.1);
+        }
 
-/* Override styles for checkboxes */
-input[type="checkbox"] {
-    width: auto; /* Removes the width rule for checkboxes */
-    height: auto; /* Removes the height rule for checkboxes */
-    padding: 0; /* Removes padding from checkboxes */
-    margin-right: 0.5rem; /* Adds a little space between checkbox and label */
-}
+        /* Ensure consistent height between input and select elements */
+        input,
+        select {
+            height: 48px;
+            /* Adjust to the desired height */
+        }
+
+        /* Override styles for checkboxes */
+        input[type="checkbox"] {
+            width: auto;
+            /* Removes the width rule for checkboxes */
+            height: auto;
+            /* Removes the height rule for checkboxes */
+            padding: 0;
+            /* Removes padding from checkboxes */
+            margin-right: 0.5rem;
+            /* Adds a little space between checkbox and label */
+        }
 
         /* Enhanced Button Style */
         button {
@@ -627,34 +662,35 @@ input[type="checkbox"] {
             .container {
                 padding: 1rem;
             }
-            
+
             .header h1 {
                 font-size: 2.5rem;
             }
-            
+
             .form-row {
                 flex-direction: column;
                 gap: 1rem;
             }
-            
+
             .stats-bar {
                 flex-wrap: wrap;
             }
-            
+
             .stat-item {
                 flex: 0 0 50%;
                 margin-bottom: 1rem;
             }
-            
+
             .countdown {
                 flex-wrap: wrap;
             }
-            
+
             .countdown-item {
                 flex: 0 0 calc(50% - 1rem);
             }
         }
-                /* Previous styles remain the same */
+
+        /* Previous styles remain the same */
 
         /* Enhanced Progress Bar */
         .progress-container {
@@ -716,22 +752,24 @@ input[type="checkbox"] {
             color: var(--primary-blue);
         }
 
-        .skill-checkbox:checked + .skill-label {
+        .skill-checkbox:checked+.skill-label {
             background: var(--bg-blue-light);
             border-color: var(--primary-blue);
         }
-.fallback-submit {
-    margin-left: 10px;
-    padding: 10px 20px;
-    background-color: #f0f0f0;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    cursor: pointer;
-}
 
-.fallback-submit:hover {
-    background-color: #e0e0e0;
-}
+        .fallback-submit {
+            margin-left: 10px;
+            padding: 10px 20px;
+            background-color: #f0f0f0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .fallback-submit:hover {
+            background-color: #e0e0e0;
+        }
+
         /* Enhanced Social Media Section */
         .social-links {
             display: grid;
@@ -875,161 +913,224 @@ input[type="checkbox"] {
             .skills-grid {
                 grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
             }
-            
+
             .social-links {
                 grid-template-columns: 1fr;
             }
-            
+
             .share-buttons {
                 flex-direction: column;
             }
-            
+
             .share-button {
                 width: 100%;
             }
         }
     </style>
 </head>
+
 <body>
     <div id="loadingOverlay" class="loading-overlay">
         <div class="loader"></div>
     </div>
 
-<div class="header">
-    <div class="header-content">
-        <div class="logo-container animate__animated animate__fadeInDown">
-            <img src="https://i.imghippo.com/files/GrAmh1728689022.png" alt="Enactus Menoufia Logo" class="logo">
-        </div>
-        <h1 class="animate__animated animate__fadeInDown animate__delay-1s">Unlock the Adventure with Adventus</h1>
-        <p class="animate__animated animate__fadeInUp animate__delay-2s">Begin your chapter with Adventus: Write the future alongside Enactus Menoufia</p>
-        
-        <div class="countdown animate__animated animate__fadeInUp animate__delay-3s">
-            <div class="countdown-item">
-                <div class="countdown-number" id="days">00</div>
-                <div class="countdown-label">Days</div>
+    <div class="header">
+        <div class="header-content">
+            <div class="logo-container animate__animated animate__fadeInDown">
+                <img src="https://i.imghippo.com/files/GrAmh1728689022.png" alt="Enactus Menoufia Logo" class="logo">
             </div>
-            <div class="countdown-item">
-                <div class="countdown-number" id="hours">00</div>
-                <div class="countdown-label">Hours</div>
+            <h1 class="animate__animated animate__fadeInDown animate__delay-1s">Unlock the Adventure with Adventus</h1>
+            <p class="animate__animated animate__fadeInUp animate__delay-2s">Begin your chapter with Adventus: Write the
+                future alongside Enactus Menoufia</p>
+
+            <div class="countdown animate__animated animate__fadeInUp animate__delay-3s">
+                <div class="countdown-item">
+                    <div class="countdown-number" id="days">00</div>
+                    <div class="countdown-label">Days</div>
+                </div>
+                <div class="countdown-item">
+                    <div class="countdown-number" id="hours">00</div>
+                    <div class="countdown-label">Hours</div>
+                </div>
+                <div class="countdown-item">
+                    <div class="countdown-number" id="minutes">00</div>
+                    <div class="countdown-label">Minutes</div>
+                </div>
+                <div class="countdown-item">
+                    <div class="countdown-number" id="seconds">00</div>
+                    <div class="countdown-label">Seconds</div>
+                </div>
             </div>
-            <div class="countdown-item">
-                <div class="countdown-number" id="minutes">00</div>
-                <div class="countdown-label">Minutes</div>
-            </div>
-            <div class="countdown-item">
-                <div class="countdown-number" id="seconds">00</div>
-                <div class="countdown-label">Seconds</div>
-            </div>
-        </div>
-        
-        <div class="stats-bar animate__animated animate__fadeInUp animate__delay-4s">
-            <div class="stat-item">
-                <div class="stat-number" data-count="37">0</div>
-                <div class="stat-label">Countries Worldwide</div>
-            </div>
-            <div class="stat-item">
-                <div class="stat-number" data-count="72000">0</div>
-                <div class="stat-label">Student Members</div>
-            </div>
-            <div class="stat-item">
-                <div class="stat-number" data-count="1730">0</div>
-                <div class="stat-label">Universities</div>
+
+            <div class="stats-bar animate__animated animate__fadeInUp animate__delay-4s">
+                <div class="stat-item">
+                    <div class="stat-number" data-count="37">0</div>
+                    <div class="stat-label">Countries Worldwide</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" data-count="72000">0</div>
+                    <div class="stat-label">Student Members</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" data-count="1730">0</div>
+                    <div class="stat-label">Universities</div>
+                </div>
             </div>
         </div>
     </div>
-</div>
-<div class="testimonial-section">
-    <h2> What Our Members Say</h2>
-    <div class="testimonial-container">
-        <div class="testimonial-card">
-            <img src="https://i.imghippo.com/files/KCczP1728841693.jpg" alt="Fatma Adel" class="testimonial-avatar">
-            <p class="testimonial-quote">"It has been an incredible experience during my three year journey at Enactus. I’ve learned from each person and discovered what I am capable of and how to step out of my comfort zone, facing huge personal and technical changes. Suuper satisfied with the whole experience and with everyone I’ve met, definitely learned from each one of them💖."</p>
-            <p class="testimonial-author">- Fatma, 4th Year Arts</p>
-        </div>
-        <div class="testimonial-card">
-            <img src="https://i.imghippo.com/files/9KOGC1728841740.jpg" alt="Beshoy Ashraf" class="testimonial-avatar">
-            <p class="testimonial-quote">"It's easy to find a place that helps you develop skills or improve yourself, but it's rare to find a community where you truly feel like you belong, where you feel that sense of family. For me, Enactus isn't just a team or a student activity; it's a family in every sense. Here, I haven't just learned skills that will benefit my career, but I've also gained invaluable things like self-confidence, teamwork, and how to be a true leader. Enactus has not only taught me but also transformed me, making me feel appreciated and part of something bigger, surrounded by people who genuinely support and push me to be the best version of myself. "</p>
-            <p class="testimonial-author">- Beshoy, 4th Year Engineering</p>
-        </div>
-        <div class="testimonial-card">
-            <img src="https://i.imghippo.com/files/SghxU1728841509.jpg" alt="Norhan Elkomy" class="testimonial-avatar">
-            <p class="testimonial-quote">""My experience with Enactus was unparalleledly exciting, as I was a HR member from this moment and the love of Enactus filled my heart day by day and increasing, and in my being I moved to become a board member of this wonderful place, it was a great honor for me to work in ENACTUS MU with all the wonderful people I met throughout my journey and together we're able to achieve the slogan of one team one dream
- Thanks, Enactus. ""</p>
-            <p class="testimonial-author">- Norhan, Early Childhood Graduate</p>
-        </div>
-        <div class="testimonial-card">
-            <img src="https://i.imghippo.com/files/il2sm1728841716.jpg" alt="Hamdy Shaaban" class="testimonial-avatar">
-            <p class="testimonial-quote">"I learned how to deal with obstacles and sudden problems and improved my idea about entrepreneurship and how to think outside the box. This is because I am a member of Enactus."</p>
-            <p class="testimonial-author">- Hamdy, 5th Year Engineering</p>
-        </div>
-        
-        <div class="testimonial-card">
-            <img src="https://i.imghippo.com/files/bO3Zs1728841660.jpg" alt="Hana Mahmoud" class="testimonial-avatar">
-            <p class="testimonial-quote">"Enactus help me in that I was able to work in a group , I got to know more people, we all learn from each other, and I also understood more in the field of committee work, technical aspects made a difference with me personally in the life and work aspects."</p>
-            <p class="testimonial-author">- Hana, 3rd Year Masscom</p>
-        </div>
-        <div class="testimonial-card">
-            <img src="https://i.imghippo.com/files/JmZRD1728841881.jpg" alt="Hamed Mohamed" class="testimonial-avatar">
-            <p class="testimonial-quote">"In fact, it's a great experience overall because it affected me a lot and taught me even more. Anyone who knew Hamed before Enactus and after Enactus will certainly notice the noticeable difference in who benefited from the place, whether on a personal or work level. In fact, it is an experience that deserves my respect and appreciation for everything you have done. From the place and what I did as well, I am completely happy that I started this place and I am ready to return at anytime because I love the place and what made me happiest is that I was trying everything I could to benefit anyone I work with."</p>
-            <p class="testimonial-author">- Hamed, 5th Year Engineering</p>
-        </div>
-        <div class="testimonial-card">
-            <img src="https://i.imghippo.com/files/lsqkd1728841572.jpg" alt="Rahma Abdelaziz" class="testimonial-avatar">
-            <p class="testimonial-quote">"I am truly grateful for the opportunity that allowed me to be part of Enactus. I have learned so much that has made me proud of myself and finally feel like I am in the right place."</p>
-            <p class="testimonial-author">- Rahma, 4th Year Education</p>
-        </div>
-        <div class="testimonial-card">
-            <img src="https://i.imghippo.com/files/fr1WY1728841549.jpg" alt="Ahmed Elsaka" class="testimonial-avatar">
-            <p class="testimonial-quote">""I’m incredibly grateful for my time at Enactus. It’s been an amazing journey where I’ve made lifelong friends and gained valuable skills. The hands-on experience boosted my confidence, and collaborating with passionate teammates taught me how to lead and make a positive impact in our community.""</p>
-            <p class="testimonial-author">- Elsaka, 4th Year Engineering</p>
-        </div>
-        
-        <div class="testimonial-card">
-            <img src="https://i.imghippo.com/files/CXGUs1728841615.jpg" alt="Zahraa Eissa" class="testimonial-avatar">
-            <p class="testimonial-quote">"I can't describe my experience in few words but I can say that It is actually one of my favorites in my life .. the remarkable situations ,  unwavering moral support all the time , people there make you feel like they're family , I learned a lot and made lots of happy memories with such a beautiful,nice and loving people.  Iam so proud of being one of such an amazing community ❤️❤️❤️"</p>
-            <p class="testimonial-author">- Zahra, 4th Year Artifical Intelligence</p>
-        </div>
-    
-        <div class="testimonial-card">
-            <img src="https://i.imghippo.com/files/xVeZO1728841856.jpg" alt="Ahmed Gamal" class="testimonial-avatar">
-            <p class="testimonial-quote">"After two years in this place , and more , I will be forever grateful for the experience , knowledge and memorable memories. They are really my second family not just words . I don't know what is this mean until I see . THANKS to everyone for everything. "</p>
-            <p class="testimonial-author">- Ahmed, 4th Year Engineering</p>
-        </div>
-        
-        
-        <div class="testimonial-card">
-            <img src="https://i.imghippo.com/files/oUEXK1728841632.jpg" alt="Alaa Mahmoud" class="testimonial-avatar">
-            <p class="testimonial-quote">"I joined Enactus by chance, but it turned out to be one of the best decisions I've made. Initially, I applied for a PR member role to complement my college major, but I ended up gaining so much more—skills that have benefited me both inside and outside of the college. After a year as a member, I felt ready for a new challenge, so I applied for a PR board position to gain new experiences . Looking back, I’m incredibly grateful that I joined Enactus from my very first year of college, and I’m committed to staying with Enactus until I graduate, learning, growing, and gaining valuable experience every step of the way."</p>
-            <p class="testimonial-author">- Alaa, 4th Year Masscom</p>
-        </div>
-        <div class="testimonial-card">
-            <img src="https://i.imghippo.com/files/GmwaK1728691360.jpg" alt="Nayel" class="testimonial-avatar">
-            <p class="testimonial-quote">"Enactus provided hands-on experience and practical insights that boosted my confidence in my abilities. Through collaboration with passionate team members, I learned how to lead effectively and make a real impact in our community.."</p>
-            <p class="testimonial-author">- Nayel, 3rd Year Arts</p>
-        </div>
-        <div class="testimonial-card">
-            <img src="https://i.imghippo.com/files/aGUvW1728691209.jpg" alt="Rawan Rafik" class="testimonial-avatar">
-            <p class="testimonial-quote">"I just wanted to say how grateful I am to have joined Enactus. It’s been such a wonderful journey, and I’ve made amazing friends who feel like family to me. I've learned so much, and I’m still learning "</p>
-            <p class="testimonial-author">- Rawan, 4th Year Masscom</p>
-        </div>
-        
-        <div class="testimonial-card">
-            <img src="https://i.imghippo.com/files/DPPyu1728691485.jpg" alt="Begad" class="testimonial-avatar">
-            <p class="testimonial-quote">"Being part of Enactus has been a pivotal experience for my journey in HR. This organization has provided me with valuable opportunities to develop my skills in communication and team management."</p>
-            <p class="testimonial-author">- Begad, 4th Year Masscom</p>
-        </div>
-        <div class="testimonial-card">
-            <img src="https://i.imghippo.com/files/Sqy6K1728691596.jpg" alt="Mariam" class="testimonial-avatar">
-            <p class="testimonial-quote">"Through hands-on projects, I have developed invaluable skills in leadership, teamwork, and innovative thinking that will benefit me long after graduation."</p>
-            <p class="testimonial-author">- Mariam, 4th Year Arts</p>
-        </div>
-        <div class="testimonial-card">
-            <img src="https://i.imghippo.com/files/JXfNv1728691680.jpg" alt="Fatima" class="testimonial-avatar">
-            <p class="testimonial-quote">"After high school, I felt lost and unsure about my passions or what I truly wanted to pursue. It wasn't until I entered university and heard about Enactus that things started to change. Joining the team, I was surrounded by passionate, visionary people, and their energy reignited something in me."</p>
-            <p class="testimonial-author">- Fatima, 3rd Year Masscom</p>
+    <div class="testimonial-section">
+        <h2> What Our Members Say</h2>
+        <div class="testimonial-container">
+            <div class="testimonial-card">
+                <img src="https://i.imghippo.com/files/KCczP1728841693.jpg" alt="Fatma Adel" class="testimonial-avatar">
+                <p class="testimonial-quote">"It has been an incredible experience during my three year journey at
+                    Enactus. I’ve learned from each person and discovered what I am capable of and how to step out of my
+                    comfort zone, facing huge personal and technical changes. Suuper satisfied with the whole experience
+                    and with everyone I’ve met, definitely learned from each one of them💖."</p>
+                <p class="testimonial-author">- Fatma, 4th Year Arts</p>
+            </div>
+            <div class="testimonial-card">
+                <img src="https://i.imghippo.com/files/9KOGC1728841740.jpg" alt="Beshoy Ashraf"
+                    class="testimonial-avatar">
+                <p class="testimonial-quote">"It's easy to find a place that helps you develop skills or improve
+                    yourself, but it's rare to find a community where you truly feel like you belong, where you feel
+                    that sense of family. For me, Enactus isn't just a team or a student activity; it's a family in
+                    every sense. Here, I haven't just learned skills that will benefit my career, but I've also gained
+                    invaluable things like self-confidence, teamwork, and how to be a true leader. Enactus has not only
+                    taught me but also transformed me, making me feel appreciated and part of something bigger,
+                    surrounded by people who genuinely support and push me to be the best version of myself. "</p>
+                <p class="testimonial-author">- Beshoy, 4th Year Engineering</p>
+            </div>
+            <div class="testimonial-card">
+                <img src="https://i.imghippo.com/files/SghxU1728841509.jpg" alt="Norhan Elkomy"
+                    class="testimonial-avatar">
+                <p class="testimonial-quote">""My experience with Enactus was unparalleledly exciting, as I was a HR
+                    member from this moment and the love of Enactus filled my heart day by day and increasing, and in my
+                    being I moved to become a board member of this wonderful place, it was a great honor for me to work
+                    in ENACTUS MU with all the wonderful people I met throughout my journey and together we're able to
+                    achieve the slogan of one team one dream
+                    Thanks, Enactus. ""</p>
+                <p class="testimonial-author">- Norhan, Early Childhood Graduate</p>
+            </div>
+            <div class="testimonial-card">
+                <img src="https://i.imghippo.com/files/il2sm1728841716.jpg" alt="Hamdy Shaaban"
+                    class="testimonial-avatar">
+                <p class="testimonial-quote">"I learned how to deal with obstacles and sudden problems and improved my
+                    idea about entrepreneurship and how to think outside the box. This is because I am a member of
+                    Enactus."</p>
+                <p class="testimonial-author">- Hamdy, 5th Year Engineering</p>
+            </div>
+
+            <div class="testimonial-card">
+                <img src="https://i.imghippo.com/files/bO3Zs1728841660.jpg" alt="Hana Mahmoud"
+                    class="testimonial-avatar">
+                <p class="testimonial-quote">"Enactus help me in that I was able to work in a group , I got to know more
+                    people, we all learn from each other, and I also understood more in the field of committee work,
+                    technical aspects made a difference with me personally in the life and work aspects."</p>
+                <p class="testimonial-author">- Hana, 3rd Year Masscom</p>
+            </div>
+            <div class="testimonial-card">
+                <img src="https://i.imghippo.com/files/JmZRD1728841881.jpg" alt="Hamed Mohamed"
+                    class="testimonial-avatar">
+                <p class="testimonial-quote">"In fact, it's a great experience overall because it affected me a lot and
+                    taught me even more. Anyone who knew Hamed before Enactus and after Enactus will certainly notice
+                    the noticeable difference in who benefited from the place, whether on a personal or work level. In
+                    fact, it is an experience that deserves my respect and appreciation for everything you have done.
+                    From the place and what I did as well, I am completely happy that I started this place and I am
+                    ready to return at anytime because I love the place and what made me happiest is that I was trying
+                    everything I could to benefit anyone I work with."</p>
+                <p class="testimonial-author">- Hamed, 5th Year Engineering</p>
+            </div>
+            <div class="testimonial-card">
+                <img src="https://i.imghippo.com/files/lsqkd1728841572.jpg" alt="Rahma Abdelaziz"
+                    class="testimonial-avatar">
+                <p class="testimonial-quote">"I am truly grateful for the opportunity that allowed me to be part of
+                    Enactus. I have learned so much that has made me proud of myself and finally feel like I am in the
+                    right place."</p>
+                <p class="testimonial-author">- Rahma, 4th Year Education</p>
+            </div>
+            <div class="testimonial-card">
+                <img src="https://i.imghippo.com/files/fr1WY1728841549.jpg" alt="Ahmed Elsaka"
+                    class="testimonial-avatar">
+                <p class="testimonial-quote">""I’m incredibly grateful for my time at Enactus. It’s been an amazing
+                    journey where I’ve made lifelong friends and gained valuable skills. The hands-on experience boosted
+                    my confidence, and collaborating with passionate teammates taught me how to lead and make a positive
+                    impact in our community.""</p>
+                <p class="testimonial-author">- Elsaka, 4th Year Engineering</p>
+            </div>
+
+            <div class="testimonial-card">
+                <img src="https://i.imghippo.com/files/CXGUs1728841615.jpg" alt="Zahraa Eissa"
+                    class="testimonial-avatar">
+                <p class="testimonial-quote">"I can't describe my experience in few words but I can say that It is
+                    actually one of my favorites in my life .. the remarkable situations , unwavering moral support all
+                    the time , people there make you feel like they're family , I learned a lot and made lots of happy
+                    memories with such a beautiful,nice and loving people. Iam so proud of being one of such an amazing
+                    community ❤️❤️❤️"</p>
+                <p class="testimonial-author">- Zahra, 4th Year Artifical Intelligence</p>
+            </div>
+
+            <div class="testimonial-card">
+                <img src="https://i.imghippo.com/files/xVeZO1728841856.jpg" alt="Ahmed Gamal"
+                    class="testimonial-avatar">
+                <p class="testimonial-quote">"After two years in this place , and more , I will be forever grateful for
+                    the experience , knowledge and memorable memories. They are really my second family not just words .
+                    I don't know what is this mean until I see . THANKS to everyone for everything. "</p>
+                <p class="testimonial-author">- Ahmed, 4th Year Engineering</p>
+            </div>
+
+
+            <div class="testimonial-card">
+                <img src="https://i.imghippo.com/files/oUEXK1728841632.jpg" alt="Alaa Mahmoud"
+                    class="testimonial-avatar">
+                <p class="testimonial-quote">"I joined Enactus by chance, but it turned out to be one of the best
+                    decisions I've made. Initially, I applied for a PR member role to complement my college major, but I
+                    ended up gaining so much more—skills that have benefited me both inside and outside of the college.
+                    After a year as a member, I felt ready for a new challenge, so I applied for a PR board position to
+                    gain new experiences . Looking back, I’m incredibly grateful that I joined Enactus from my very
+                    first year of college, and I’m committed to staying with Enactus until I graduate, learning,
+                    growing, and gaining valuable experience every step of the way."</p>
+                <p class="testimonial-author">- Alaa, 4th Year Masscom</p>
+            </div>
+            <div class="testimonial-card">
+                <img src="https://i.imghippo.com/files/GmwaK1728691360.jpg" alt="Nayel" class="testimonial-avatar">
+                <p class="testimonial-quote">"Enactus provided hands-on experience and practical insights that boosted
+                    my confidence in my abilities. Through collaboration with passionate team members, I learned how to
+                    lead effectively and make a real impact in our community.."</p>
+                <p class="testimonial-author">- Nayel, 3rd Year Arts</p>
+            </div>
+            <div class="testimonial-card">
+                <img src="https://i.imghippo.com/files/aGUvW1728691209.jpg" alt="Rawan Rafik"
+                    class="testimonial-avatar">
+                <p class="testimonial-quote">"I just wanted to say how grateful I am to have joined Enactus. It’s been
+                    such a wonderful journey, and I’ve made amazing friends who feel like family to me. I've learned so
+                    much, and I’m still learning "</p>
+                <p class="testimonial-author">- Rawan, 4th Year Masscom</p>
+            </div>
+
+            <div class="testimonial-card">
+                <img src="https://i.imghippo.com/files/DPPyu1728691485.jpg" alt="Begad" class="testimonial-avatar">
+                <p class="testimonial-quote">"Being part of Enactus has been a pivotal experience for my journey in HR.
+                    This organization has provided me with valuable opportunities to develop my skills in communication
+                    and team management."</p>
+                <p class="testimonial-author">- Begad, 4th Year Masscom</p>
+            </div>
+            <div class="testimonial-card">
+                <img src="https://i.imghippo.com/files/Sqy6K1728691596.jpg" alt="Mariam" class="testimonial-avatar">
+                <p class="testimonial-quote">"Through hands-on projects, I have developed invaluable skills in
+                    leadership, teamwork, and innovative thinking that will benefit me long after graduation."</p>
+                <p class="testimonial-author">- Mariam, 4th Year Arts</p>
+            </div>
+            <div class="testimonial-card">
+                <img src="https://i.imghippo.com/files/JXfNv1728691680.jpg" alt="Fatima" class="testimonial-avatar">
+                <p class="testimonial-quote">"After high school, I felt lost and unsure about my passions or what I
+                    truly wanted to pursue. It wasn't until I entered university and heard about Enactus that things
+                    started to change. Joining the team, I was surrounded by passionate, visionary people, and their
+                    energy reignited something in me."</p>
+                <p class="testimonial-author">- Fatima, 3rd Year Masscom</p>
+            </div>
         </div>
     </div>
-</div>
     <div class="container">
         <div class="progress-container animate__animated animate__fadeIn">
             <div class="progress-label">
@@ -1079,39 +1180,40 @@ input[type="checkbox"] {
                 </div>
             </div>
 
-           <div class="form-section animate-slide">
+            <div class="form-section animate-slide">
                 <h2 class="section-title"><i class="fas fa-graduation-cap"></i>Academic Background</h2>
 
                 <div class="form-row">
                     <div class="form-group">
                         <label for="faculty">Faculty <span class="mandatory">*</span></label>
-                   <select id="faculty" name="faculty" required>
-    <option value="">Select Faculty</option>
-    <option value="Agriculture">Agriculture</option>
-    <option value="Artificial Intelligence">Artificial Intelligence</option>
-    <option value="Arts">Arts</option>
-    <option value="Commerce">Commerce</option>
-    <option value="Computer Science">Computer Science</option>
-    <option value="Dentistry">Dentistry</option>
-    <option value="Education">Education</option>
-    <option value="Electronic Engineering">Electronic Engineering</option>
-    <option value="Engineering">Engineering</option>
-    <option value="Home Economics">Home Economics</option>
-    <option value="Law">Law</option>
-    <option value="Masscom">Masscom</option>
-    <option value="Medical Science Tech.">Medical Science Tech.</option>
-    <option value="Medicine">Medicine</option>
-    <option value="Nursing">Nursing</option>
-    <option value="Pharmacy">Pharmacy</option>
-    <option value="Physical Education">Physical Education</option>
-    <option value="Science">Science</option>
-    <option value="Specific Education">Specific Education</option>
-    <option value="Vet. Medicine">Vet. Medicine</option>
-    <option value="other">Other</option>
-</select>
-<div id="loadingOverlay" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); justify-content: center; align-items: center; z-index: 1000;">
-    <div style="color: white; font-size: 24px;">Loading...</div>
-</div>
+                        <select id="faculty" name="faculty" required>
+                            <option value="">Select Faculty</option>
+                            <option value="Agriculture">Agriculture</option>
+                            <option value="Artificial Intelligence">Artificial Intelligence</option>
+                            <option value="Arts">Arts</option>
+                            <option value="Commerce">Commerce</option>
+                            <option value="Computer Science">Computer Science</option>
+                            <option value="Dentistry">Dentistry</option>
+                            <option value="Education">Education</option>
+                            <option value="Electronic Engineering">Electronic Engineering</option>
+                            <option value="Engineering">Engineering</option>
+                            <option value="Home Economics">Home Economics</option>
+                            <option value="Law">Law</option>
+                            <option value="Masscom">Masscom</option>
+                            <option value="Medical Science Tech.">Medical Science Tech.</option>
+                            <option value="Medicine">Medicine</option>
+                            <option value="Nursing">Nursing</option>
+                            <option value="Pharmacy">Pharmacy</option>
+                            <option value="Physical Education">Physical Education</option>
+                            <option value="Science">Science</option>
+                            <option value="Specific Education">Specific Education</option>
+                            <option value="Vet. Medicine">Vet. Medicine</option>
+                            <option value="other">Other</option>
+                        </select>
+                        <div id="loadingOverlay"
+                            style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); justify-content: center; align-items: center; z-index: 1000;">
+                            <div style="color: white; font-size: 24px;">Loading...</div>
+                        </div>
                     </div>
                     <div class="form-group">
                         <label for="otherFaculty">Other Faculty <span class="optional">(Optional)</span></label>
@@ -1136,51 +1238,57 @@ input[type="checkbox"] {
 
             <div class="form-section animate-slide">
                 <h2 class="section-title"><i class="fas fa-briefcase"></i>Skills & Experience</h2>
-                
-<div class="form-group">
-    <label>Select Your Skills</label>
-    <div class="skills-grid">
-        <input type="checkbox" id="skill1" name="skills" value="leadership" class="skill-checkbox">
-        <label for="skill1" class="skill-label"><i class="fas fa-users"></i>Leadership</label>
-        
-        <input type="checkbox" id="skill2" name="skills" value="communication" class="skill-checkbox">
-        <label for="skill2" class="skill-label"><i class="fas fa-comments"></i>Communication</label>
-        
-        <input type="checkbox" id="skill3" name="skills" value="projectManagement" class="skill-checkbox">
-        <label for="skill3" class="skill-label"><i class="fas fa-tasks"></i>Project Management</label>
-        
-        <input type="checkbox" id="skill4" name="skills" value="marketing" class="skill-checkbox">
-        <label for="skill4" class="skill-label"><i class="fas fa-bullhorn"></i>Marketing</label>
 
-        <input type="checkbox" id="skill5" name="skills" value="entrepreneurship" class="skill-checkbox">
-        <label for="skill5" class="skill-label"><i class="fas fa-briefcase"></i>Entrepreneurship</label>
+                <div class="form-group">
+                    <label>Select Your Skills</label>
+                    <div class="skills-grid">
+                        <input type="checkbox" id="skill1" name="skills" value="leadership" class="skill-checkbox">
+                        <label for="skill1" class="skill-label"><i class="fas fa-users"></i>Leadership</label>
 
-        <input type="checkbox" id="skill6" name="skills" value="sustainability" class="skill-checkbox">
-        <label for="skill6" class="skill-label"><i class="fas fa-leaf"></i>Sustainability</label>
+                        <input type="checkbox" id="skill2" name="skills" value="communication" class="skill-checkbox">
+                        <label for="skill2" class="skill-label"><i class="fas fa-comments"></i>Communication</label>
 
-        <input type="checkbox" id="skill7" name="skills" value="innovation" class="skill-checkbox">
-        <label for="skill7" class="skill-label"><i class="fas fa-lightbulb"></i>Innovation</label>
+                        <input type="checkbox" id="skill3" name="skills" value="projectManagement"
+                            class="skill-checkbox">
+                        <label for="skill3" class="skill-label"><i class="fas fa-tasks"></i>Project Management</label>
 
-        <input type="checkbox" id="skill8" name="skills" value="programming" class="skill-checkbox">
-        <label for="skill8" class="skill-label"><i class="fas fa-code"></i>Programming</label>
+                        <input type="checkbox" id="skill4" name="skills" value="marketing" class="skill-checkbox">
+                        <label for="skill4" class="skill-label"><i class="fas fa-bullhorn"></i>Marketing</label>
 
-        <input type="checkbox" id="skill9" name="skills" value="financialLiteracy" class="skill-checkbox">
-        <label for="skill9" class="skill-label"><i class="fas fa-money-bill-wave"></i>Financial Literacy</label>
+                        <input type="checkbox" id="skill5" name="skills" value="entrepreneurship"
+                            class="skill-checkbox">
+                        <label for="skill5" class="skill-label"><i class="fas fa-briefcase"></i>Entrepreneurship</label>
 
-        <input type="checkbox" id="skill10" name="skills" value="strategicPlanning" class="skill-checkbox">
-        <label for="skill10" class="skill-label"><i class="fas fa-chalkboard-teacher"></i>Strategic Planning</label>
+                        <input type="checkbox" id="skill6" name="skills" value="sustainability" class="skill-checkbox">
+                        <label for="skill6" class="skill-label"><i class="fas fa-leaf"></i>Sustainability</label>
 
-    </div>
-</div>
+                        <input type="checkbox" id="skill7" name="skills" value="innovation" class="skill-checkbox">
+                        <label for="skill7" class="skill-label"><i class="fas fa-lightbulb"></i>Innovation</label>
+
+                        <input type="checkbox" id="skill8" name="skills" value="programming" class="skill-checkbox">
+                        <label for="skill8" class="skill-label"><i class="fas fa-code"></i>Programming</label>
+
+                        <input type="checkbox" id="skill9" name="skills" value="financialLiteracy"
+                            class="skill-checkbox">
+                        <label for="skill9" class="skill-label"><i class="fas fa-money-bill-wave"></i>Financial
+                            Literacy</label>
+
+                        <input type="checkbox" id="skill10" name="skills" value="strategicPlanning"
+                            class="skill-checkbox">
+                        <label for="skill10" class="skill-label"><i class="fas fa-chalkboard-teacher"></i>Strategic
+                            Planning</label>
+
+                    </div>
+                </div>
 
                 <div class="form-group">
                     <label for="experience" class="required-label">Relevant Experience</label>
                     <textarea id="experience" name="experience" rows="4" optional
-                              placeholder="Describe any relevant experience in leadership, volunteering, or project work..."></textarea>
+                        placeholder="Describe any relevant experience in leadership, volunteering, or project work..."></textarea>
                 </div>
             </div>
 
-             
+
 
             <div class="form-section animate-slide">
                 <h2 class="section-title">Committee Selection</h2>
@@ -1201,9 +1309,9 @@ input[type="checkbox"] {
                 <div id="committeeQuestions"></div>
             </div>
 
-          <div class="form-section animate-slide">
+            <div class="form-section animate-slide">
                 <h2 class="section-title"><i class="fas fa-link"></i>Social Media & Portfolio</h2>
-                
+
                 <div class="social-links">
                     <div class="form-group">
                         <label for="linkedin">LinkedIn</label>
@@ -1227,7 +1335,7 @@ input[type="checkbox"] {
                 </div>
             </div>
 
-                 <!-- Legal Section -->
+            <!-- Legal Section -->
             <div class="legal-section animate__animated animate__fadeIn">
                 <h3 class="legal-title"><i class="fas fa-gavel"></i>Terms & Conditions</h3>
                 <ul class="legal-list">
@@ -1236,25 +1344,27 @@ input[type="checkbox"] {
                     <li>I consent to Enactus Menoufia processing my personal data for recruitment purposes.</li>
                 </ul>
                 <div class="form-group">
-    <input type="checkbox" id="terms" name="terms" required>
-    <label for="terms">I agree to the terms and conditions <span class="mandatory">*</span></label>
-</div>
+                    <input type="checkbox" id="terms" name="terms" required>
+                    <label for="terms">I agree to the terms and conditions <span class="mandatory">*</span></label>
+                </div>
 
             </div>
 
             <button type="submit" class="animate__animated animate__fadeIn">Submit Application</button>
         </form>
-</div>
-        <div class="share-section">
-            <h2>Share This Opportunity</h2>
-            <p>Help us spread the word and invite your friends to join Enactus Menoufia!</p>
-            <div class="share-buttons">
-                <a href="#" class="share-button share-whatsapp" onclick="shareWhatsApp()"><i class="fab fa-whatsapp"></i> Share on WhatsApp</a>
-                <a href="#" class="share-button share-facebook" onclick="shareFacebook()"><i class="fab fa-facebook"></i> Share on Facebook</a>
-<!--                 <a href="#" class="share-button share-instagram" onclick="shareInstagram()"><i class="fab fa-instagram"></i> Share on Instagram</a>
+    </div>
+    <div class="share-section">
+        <h2>Share This Opportunity</h2>
+        <p>Help us spread the word and invite your friends to join Enactus Menoufia!</p>
+        <div class="share-buttons">
+            <a href="#" class="share-button share-whatsapp" onclick="shareWhatsApp()"><i class="fab fa-whatsapp"></i>
+                Share on WhatsApp</a>
+            <a href="#" class="share-button share-facebook" onclick="shareFacebook()"><i class="fab fa-facebook"></i>
+                Share on Facebook</a>
+            <!--                 <a href="#" class="share-button share-instagram" onclick="shareInstagram()"><i class="fab fa-instagram"></i> Share on Instagram</a>
                 <a href="#" class="share-button share-messenger" onclick="shareMessenger()"><i class="fab fa-facebook-messenger"></i> Share on Messenger</a> -->
-            </div>
         </div>
+    </div>
 
 
 
@@ -1265,28 +1375,28 @@ input[type="checkbox"] {
         <p>Transforming lives. Shaping a better, more sustainable world.</p>
     </footer>
 
-   <script>
-       // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-const firebaseConfig = {
-  apiKey: "AIzaSyCl41GRz1Ngty10QijcAslk1yphRkoJlac",
-  authDomain: "recruitment-bb721.firebaseapp.com",
-  projectId: "recruitment-bb721",
-  storageBucket: "recruitment-bb721.appspot.com",
-  messagingSenderId: "331594356283",
-  appId: "1:331594356283:web:e16be39b25167e99d0ee1e",
-  measurementId: "G-HZXCFSG97D"
-};
+    <script>
+        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+        const firebaseConfig = {
+            apiKey: "AIzaSyCl41GRz1Ngty10QijcAslk1yphRkoJlac",
+            authDomain: "recruitment-bb721.firebaseapp.com",
+            projectId: "recruitment-bb721",
+            storageBucket: "recruitment-bb721.appspot.com",
+            messagingSenderId: "331594356283",
+            appId: "1:331594356283:web:e16be39b25167e99d0ee1e",
+            measurementId: "G-HZXCFSG97D"
+        };
         // Initialize Firebase
-  firebase.initializeApp(firebaseConfig);
+        firebase.initializeApp(firebaseConfig);
 
-  // Initialize Firestore
-  const db = firebase.firestore();
-// Loading overlay
-window.addEventListener('load', function() {
-    document.getElementById('loadingOverlay').style.display = 'none';
-});
+        // Initialize Firestore
+        const db = firebase.firestore();
+        // Loading overlay
+        window.addEventListener('load', function () {
+            document.getElementById('loadingOverlay').style.display = 'none';
+        });
 
-  // Enhanced countdown timer
+        // Enhanced countdown timer
         function updateCountdown() {
             const deadline = new Date("2024-10-26T21:59:59").getTime();
             const now = new Date().getTime();
@@ -1313,7 +1423,7 @@ window.addEventListener('load', function() {
             const duration = 2000;
             const step = target / duration * 10;
             let current = 0;
-            
+
             const updateStat = () => {
                 current += step;
                 if (current < target) {
@@ -1323,224 +1433,224 @@ window.addEventListener('load', function() {
                     stat.textContent = target;
                 }
             };
-            
+
             updateStat();
         });
-// Trigger stats animation when in view
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            animateStats();
-            observer.unobserve(entry.target);
+        // Trigger stats animation when in view
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    animateStats();
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        observer.observe(document.querySelector('.stats-bar'));
+
+        // Form progress
+        const form = document.getElementById('recruitmentForm');
+        const progressBar = document.getElementById('formProgress');
+        const progressPercentage = document.getElementById('progressPercentage');
+
+        function updateProgress() {
+            const totalFields = form.querySelectorAll('input:required, select:required, textarea:required').length;
+            const completedFields = form.querySelectorAll('input:required:valid, select:required:valid, textarea:required:valid').length;
+            const progress = (completedFields / totalFields) * 100;
+            progressBar.style.width = `${progress}%`;
+            progressPercentage.textContent = `${Math.round(progress)}%`;
         }
-    });
-}, { threshold: 0.5 });
 
-observer.observe(document.querySelector('.stats-bar'));
+        form.addEventListener('input', updateProgress);
 
-// Form progress
-const form = document.getElementById('recruitmentForm');
-const progressBar = document.getElementById('formProgress');
-const progressPercentage = document.getElementById('progressPercentage');
+        // Skills selection
+        const skillCheckboxes = document.querySelectorAll('.skill-checkbox');
+        skillCheckboxes.forEach(checkbox => {
+            checkbox.addEventListener('change', updateProgress);
+        });
 
-function updateProgress() {
-    const totalFields = form.querySelectorAll('input:required, select:required, textarea:required').length;
-    const completedFields = form.querySelectorAll('input:required:valid, select:required:valid, textarea:required:valid').length;
-    const progress = (completedFields / totalFields) * 100;
-    progressBar.style.width = `${progress}%`;
-    progressPercentage.textContent = `${Math.round(progress)}%`;
-}
+        gsap.registerPlugin(ScrollTrigger);
 
-form.addEventListener('input', updateProgress);
-
-// Skills selection
-const skillCheckboxes = document.querySelectorAll('.skill-checkbox');
-skillCheckboxes.forEach(checkbox => {
-    checkbox.addEventListener('change', updateProgress);
-});
-
-gsap.registerPlugin(ScrollTrigger);
-
-const committeeQuestions = {
-    "Human Resources": [
-        { label: "Why are you interested in joining the HR Committee?", name: "hrQ1" },
-        { label: "Describe your experience in talent acquisition and development, if you have any.", name: "hrQ2" },
-        { label: "What do you know about HRM and HRD?", name: "hrQ3" },
-        { label: "What strategies would you implement to maintain team motivation?", name: "hrQ4" }
-    ],
-    "Projects": [
-        { label: "Do you have any previous experience in project management or social entrepreneurship? If yes, please describe.", name: "projectsQ1" },
-        { label: "Can you briefly explain what you know about the project life cycle and its main stages?", name: "projectsQ2" },
-        { label: "Why are you interested in joining the Project Committee? (write a response of at least 150 words) explaining your reasons for wanting to be part of the team, what you hope to contribute, and how this opportunity aligns with your personal and professional goals", name: "projectsQ3" },
-        { label: "What do you know about SDGs and KPIs?", name: "projectsQ4" }
-    ],
-    "Presentation": [
-        { label: "What are the differences between public speaking and formal presentation?", name: "presentationQ1" },
-        { label: "Why are you interested in joining the Presentation Committee?", name: "presentationQ2" },
-        { label: "Rate your English speaking skills (Rate from 1 to 10)", name: "presentationQ3" },
-        { label: "Do you have any previous experience in public speaking or event hosting? If yes, please describe.", name: "presentationQ4" }
-    ],
-    "Graphic Design": [
-        { label: "Why are you interested in joining the Graphic Design committee?", name: "graphicDesignQ1" },
-        { label: "Which design software do you primarily work with?", name: "graphicDesignQ2" },
-        { label: "In your opinion, what are the essential elements that should be present in any design?", name: "graphicDesignQ3" },
-        { label: "Rate your experience in graphic design (Rate from 1 to 10), Share your portfolio in the portfolio section later in the form", name: "graphicDesignQ4" }
-    ],
-    "Video Editing & Photography": [
-        { label: "Why are you interested in joining the Video Editing and Photography Committee?", name: "videoPhotoQ1" },
-        { label: "Do you have access to video production equipment, such as a camera, or related tools?", name: "videoPhotoQ2" },
-        { label: "Do you have any previous experience in video editing or photography? If yes, please describe.", name: "videoPhotoQ3" },
-        { label: "What type of software do you work on?", name: "videoPhotoQ4" }
-    ],
-    "Public Relations & Fundraising": [
-        { label: "Why are you interested in joining the PR & FR Committee?", name: "prFrQ1" },
-        { label: "What strategies would you use to secure funding or sponsorships?", name: "prFrQ2" },
-        { label: "What is the difference between the PR & FR team and the marketing team?", name: "prFrQ3" },
-        { label: "Do you have any previous experience in public relations, marketing, or fundraising? If yes, please describe.", name: "prFrQ4" }
-    ],
-    "Logistics": [
-        { label: "How do you handle the logistical challenges of a large event?", name: "logisticsQ1" },
-        { label: "Why are you interested in joining the Logistics Committee?", name: "logisticsQ2" },
-        { label: "Have you ever helped organize or plan an event before? If yes, please describe.", name: "logisticsQ3" },
-        { label: "What do you think is the most important thing while making a schedule for an event?", name: "logisticsQ4" }
-    ],
-    "Digital Marketing": [
-        { label: "Do you have any previous experience in digital marketing, social media management, or online advertising? If yes, please describe.", name: "digitalMarketingQ1" },
-        { label: "Why are you interested in joining the Digital Marketing Committee?", name: "digitalMarketingQ2" },
-        { label: "In your opinion, how can I get the highest Instagram reach?", name: "digitalMarketingQ3" },
-        { label: "How would you contribute to promoting Enactus through digital channels & social media?", name: "digitalMarketingQ4" }
-    ]
-};
+        const committeeQuestions = {
+            "Human Resources": [
+                { label: "Why are you interested in joining the HR Committee?", name: "hrQ1" },
+                { label: "Describe your experience in talent acquisition and development, if you have any.", name: "hrQ2" },
+                { label: "What do you know about HRM and HRD?", name: "hrQ3" },
+                { label: "What strategies would you implement to maintain team motivation?", name: "hrQ4" }
+            ],
+            "Projects": [
+                { label: "Do you have any previous experience in project management or social entrepreneurship? If yes, please describe.", name: "projectsQ1" },
+                { label: "Can you briefly explain what you know about the project life cycle and its main stages?", name: "projectsQ2" },
+                { label: "Why are you interested in joining the Project Committee? (write a response of at least 150 words) explaining your reasons for wanting to be part of the team, what you hope to contribute, and how this opportunity aligns with your personal and professional goals", name: "projectsQ3" },
+                { label: "What do you know about SDGs and KPIs?", name: "projectsQ4" }
+            ],
+            "Presentation": [
+                { label: "What are the differences between public speaking and formal presentation?", name: "presentationQ1" },
+                { label: "Why are you interested in joining the Presentation Committee?", name: "presentationQ2" },
+                { label: "Rate your English speaking skills (Rate from 1 to 10)", name: "presentationQ3" },
+                { label: "Do you have any previous experience in public speaking or event hosting? If yes, please describe.", name: "presentationQ4" }
+            ],
+            "Graphic Design": [
+                { label: "Why are you interested in joining the Graphic Design committee?", name: "graphicDesignQ1" },
+                { label: "Which design software do you primarily work with?", name: "graphicDesignQ2" },
+                { label: "In your opinion, what are the essential elements that should be present in any design?", name: "graphicDesignQ3" },
+                { label: "Rate your experience in graphic design (Rate from 1 to 10), Share your portfolio in the portfolio section later in the form", name: "graphicDesignQ4" }
+            ],
+            "Video Editing & Photography": [
+                { label: "Why are you interested in joining the Video Editing and Photography Committee?", name: "videoPhotoQ1" },
+                { label: "Do you have access to video production equipment, such as a camera, or related tools?", name: "videoPhotoQ2" },
+                { label: "Do you have any previous experience in video editing or photography? If yes, please describe.", name: "videoPhotoQ3" },
+                { label: "What type of software do you work on?", name: "videoPhotoQ4" }
+            ],
+            "Public Relations & Fundraising": [
+                { label: "Why are you interested in joining the PR & FR Committee?", name: "prFrQ1" },
+                { label: "What strategies would you use to secure funding or sponsorships?", name: "prFrQ2" },
+                { label: "What is the difference between the PR & FR team and the marketing team?", name: "prFrQ3" },
+                { label: "Do you have any previous experience in public relations, marketing, or fundraising? If yes, please describe.", name: "prFrQ4" }
+            ],
+            "Logistics": [
+                { label: "How do you handle the logistical challenges of a large event?", name: "logisticsQ1" },
+                { label: "Why are you interested in joining the Logistics Committee?", name: "logisticsQ2" },
+                { label: "Have you ever helped organize or plan an event before? If yes, please describe.", name: "logisticsQ3" },
+                { label: "What do you think is the most important thing while making a schedule for an event?", name: "logisticsQ4" }
+            ],
+            "Digital Marketing": [
+                { label: "Do you have any previous experience in digital marketing, social media management, or online advertising? If yes, please describe.", name: "digitalMarketingQ1" },
+                { label: "Why are you interested in joining the Digital Marketing Committee?", name: "digitalMarketingQ2" },
+                { label: "In your opinion, how can I get the highest Instagram reach?", name: "digitalMarketingQ3" },
+                { label: "How would you contribute to promoting Enactus through digital channels & social media?", name: "digitalMarketingQ4" }
+            ]
+        };
 
 
-function showCommitteeQuestions() {
-    const committee = document.getElementById('preferredCommittee').value;
-    const container = document.getElementById('committeeQuestions');
-    container.innerHTML = '';
+        function showCommitteeQuestions() {
+            const committee = document.getElementById('preferredCommittee').value;
+            const container = document.getElementById('committeeQuestions');
+            container.innerHTML = '';
 
-    if (committee && committeeQuestions[committee]) {
-        committeeQuestions[committee].forEach(q => {
-            const div = document.createElement('div');
-            div.className = 'form-group';
-            div.innerHTML = `
+            if (committee && committeeQuestions[committee]) {
+                committeeQuestions[committee].forEach(q => {
+                    const div = document.createElement('div');
+                    div.className = 'form-group';
+                    div.innerHTML = `
                 <label for="${q.name}" class="required-label">${q.label}</label>
                 <textarea id="${q.name}" name="${q.name}" rows="4" required></textarea>
             `;
-            container.appendChild(div);
-        });
-    }
-
-    updateProgress();
-}
-
-document.getElementById('preferredCommittee').addEventListener('change', showCommitteeQuestions);
-
-
-// Add the missing animateStats function
-function animateStats() {
-    const stats = document.querySelectorAll('.stat-number');
-    stats.forEach(stat => {
-        const target = parseInt(stat.getAttribute('data-count'));
-        const duration = 2000;
-        const step = target / duration * 10;
-        let current = 0;
-        
-        const updateStat = () => {
-            current += step;
-            if (current < target) {
-                stat.textContent = Math.floor(current);
-                requestAnimationFrame(updateStat);
-            } else {
-                stat.textContent = target;
+                    container.appendChild(div);
+                });
             }
-        };
-        
-        updateStat();
-    });
-}
-// Function to validate Egyptian phone number
-function isValidEgyptianPhoneNumber(phone) {
-    const egyptianPhoneRegex = /^(01)[0-25][0-9]{8}$/;
-    return egyptianPhoneRegex.test(phone);
-}
 
-// Function to validate email
-function isValidEmail(email) {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailRegex.test(email);
-}
-
-// Function to validate name (only letters and spaces)
-function isValidFirstName(name) {
-    const nameRegex = /^[\p{L}\s'-]+$/u;
-    return nameRegex.test(name);
-}
-
-function isValidLastName(name) {
-    const nameRegex = /^[\p{L}\s'-]+$/u;
-    return nameRegex.test(name);
-}
-
-
-// Add event listeners for real-time validation
-document.addEventListener('DOMContentLoaded', function() {
-    const form = document.getElementById('recruitmentForm');
-    
-    // Phone number validation
-    const phoneInput = form.querySelector('input[name="phone"]');
-    phoneInput.addEventListener('input', function() {
-        if (!isValidEgyptianPhoneNumber(this.value)) {
-            this.setCustomValidity('Please enter a valid Egyptian phone number (e.g., 01xxxxxxxxx)');
-        } else {
-            this.setCustomValidity('');
+            updateProgress();
         }
-    });
 
-    // Email validation
-    const emailInput = form.querySelector('input[name="email"]');
-    emailInput.addEventListener('input', function() {
-        if (!isValidEmail(this.value)) {
-            this.setCustomValidity('Please enter a valid email address');
-        } else {
-            this.setCustomValidity('');
+        document.getElementById('preferredCommittee').addEventListener('change', showCommitteeQuestions);
+
+
+        // Add the missing animateStats function
+        function animateStats() {
+            const stats = document.querySelectorAll('.stat-number');
+            stats.forEach(stat => {
+                const target = parseInt(stat.getAttribute('data-count'));
+                const duration = 2000;
+                const step = target / duration * 10;
+                let current = 0;
+
+                const updateStat = () => {
+                    current += step;
+                    if (current < target) {
+                        stat.textContent = Math.floor(current);
+                        requestAnimationFrame(updateStat);
+                    } else {
+                        stat.textContent = target;
+                    }
+                };
+
+                updateStat();
+            });
         }
-    });
-
-    // Name validation
-    const firstNameInput = form.querySelector('input[firstName="firstName"]');
-    firstName.addEventListener('input', function() {
-        if (!isValidFirstName(this.value)) {
-            this.setCustomValidity('Please enter a valid name (only letters and spaces)');
-        } else {
-            this.setCustomValidity('');
+        // Function to validate Egyptian phone number
+        function isValidEgyptianPhoneNumber(phone) {
+            const egyptianPhoneRegex = /^(01)[0-25][0-9]{8}$/;
+            return egyptianPhoneRegex.test(phone);
         }
-    });
-    const lastNameInput = form.querySelector('input[lastName="lastName"]');
-    lastName.addEventListener('input', function() {
-        if (!isValidLastName(this.value)) {
-            this.setCustomValidity('Please enter a valid name (only letters and spaces)');
-        } else {
-            this.setCustomValidity('');
+
+        // Function to validate email
+        function isValidEmail(email) {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return emailRegex.test(email);
         }
-    });
+
+        // Function to validate name (only letters and spaces)
+        function isValidFirstName(name) {
+            const nameRegex = /^[\p{L}\s'-]+$/u;
+            return nameRegex.test(name);
+        }
+
+        function isValidLastName(name) {
+            const nameRegex = /^[\p{L}\s'-]+$/u;
+            return nameRegex.test(name);
+        }
 
 
-});
-// Add these functions to your existing JavaScript
-function showLoading() {
-    const loadingOverlay = document.getElementById('loadingOverlay');
-    loadingOverlay.style.display = 'flex';
-}
+        // Add event listeners for real-time validation
+        document.addEventListener('DOMContentLoaded', function () {
+            const form = document.getElementById('recruitmentForm');
 
-function hideLoading() {
-    const loadingOverlay = document.getElementById('loadingOverlay');
-    loadingOverlay.style.display = 'none';
-}
+            // Phone number validation
+            const phoneInput = form.querySelector('input[name="phone"]');
+            phoneInput.addEventListener('input', function () {
+                if (!isValidEgyptianPhoneNumber(this.value)) {
+                    this.setCustomValidity('Please enter a valid Egyptian phone number (e.g., 01xxxxxxxxx)');
+                } else {
+                    this.setCustomValidity('');
+                }
+            });
 
-function showSuccessMessage() {
-    const successMessage = document.createElement('div');
-    successMessage.textContent = 'Form submitted successfully!';
-    successMessage.style.cssText = `
+            // Email validation
+            const emailInput = form.querySelector('input[name="email"]');
+            emailInput.addEventListener('input', function () {
+                if (!isValidEmail(this.value)) {
+                    this.setCustomValidity('Please enter a valid email address');
+                } else {
+                    this.setCustomValidity('');
+                }
+            });
+
+            // Name validation
+            const firstNameInput = form.querySelector('input[firstName="firstName"]');
+            firstName.addEventListener('input', function () {
+                if (!isValidFirstName(this.value)) {
+                    this.setCustomValidity('Please enter a valid name (only letters and spaces)');
+                } else {
+                    this.setCustomValidity('');
+                }
+            });
+            const lastNameInput = form.querySelector('input[lastName="lastName"]');
+            lastName.addEventListener('input', function () {
+                if (!isValidLastName(this.value)) {
+                    this.setCustomValidity('Please enter a valid name (only letters and spaces)');
+                } else {
+                    this.setCustomValidity('');
+                }
+            });
+
+
+        });
+        // Add these functions to your existing JavaScript
+        function showLoading() {
+            const loadingOverlay = document.getElementById('loadingOverlay');
+            loadingOverlay.style.display = 'flex';
+        }
+
+        function hideLoading() {
+            const loadingOverlay = document.getElementById('loadingOverlay');
+            loadingOverlay.style.display = 'none';
+        }
+
+        function showSuccessMessage() {
+            const successMessage = document.createElement('div');
+            successMessage.textContent = 'Form submitted successfully!';
+            successMessage.style.cssText = `
         position: fixed;
         top: 50%;
         left: 50%;
@@ -1551,13 +1661,13 @@ function showSuccessMessage() {
         border-radius: 5px;
         z-index: 1000;
     `;
-    document.body.appendChild(successMessage);
-    return successMessage;
-}
-function showFailureMessage() {
-    const successMessage = document.createElement('div');
-    successMessage.textContent = 'Form Failed!';
-    successMessage.style.cssText = `
+            document.body.appendChild(successMessage);
+            return successMessage;
+        }
+        function showFailureMessage() {
+            const successMessage = document.createElement('div');
+            successMessage.textContent = 'Form Failed!';
+            successMessage.style.cssText = `
         position: fixed;
         top: 50%;
         left: 50%;
@@ -1568,424 +1678,425 @@ function showFailureMessage() {
         border-radius: 5px;
         z-index: 1000;
     `;
-    document.body.appendChild(successMessage);
-    return successMessage;
-}
-function redirectToGoogleForm() {
-    // Replace this URL with your actual Google Form URL
-    const googleFormUrl = 'https://forms.gle/Hyk6UESqTVndquZC6';
-    window.open(googleFormUrl, '_blank');
-}
-
-// Modify your existing submitForm function
-function submitForm(event) {
-    event.preventDefault();
-    const form = event.target;
-    
-    showLoading();
-    
-    const loadingOverlay = document.getElementById('loadingOverlay');
-    
-    // Perform additional validations
-    const phone = form.querySelector('input[name="phone"]').value;
-    const email = form.querySelector('input[name="email"]').value;
-    const firstName = form.querySelector('input[name="firstName"]').value;
-    const lastName = form.querySelector('input[name="lastName"]').value;
-   
-    if (!isValidEgyptianPhoneNumber(phone)) {
-        alert('Please enter a valid Egyptian phone number.');
-        return;
-    }
-    if (!isValidEmail(email)) {
-        alert('Please enter a valid email address.');
-        return;
-    }
-    if (!isValidFirstName(firstName)) {
-        alert('Please enter a valid name (only letters and spaces).');
-        return;
-    }
-    if (!isValidLastName(lastName)) {
-        alert('Please enter a valid name (only letters and spaces).');
-        return;
-    }
-   
-    // If all validations pass, proceed with form submission
-    loadingOverlay.classList.add('active');
-    
-    const formData = new FormData(form);
-    const jsonData = {};
-    
-    // Handle regular form fields
-    formData.forEach((value, key) => {
-        if (key !== 'skills') {
-            jsonData[key] = value;
+            document.body.appendChild(successMessage);
+            return successMessage;
         }
-    });
+        function redirectToGoogleForm() {
+            // Replace this URL with your actual Google Form URL
+            const googleFormUrl = 'https://forms.gle/Hyk6UESqTVndquZC6';
+            window.open(googleFormUrl, '_blank');
+        }
 
-    // Handle skills checkboxes
-    const selectedSkills = Array.from(document.querySelectorAll('.skill-checkbox:checked'))
-        .map(checkbox => checkbox.value);
-    jsonData['skills'] = selectedSkills;
+        // Modify your existing submitForm function
+        function submitForm(event) {
+            event.preventDefault();
+            const form = event.target;
 
-    // Add committee-specific questions and answers
-    const committeeQuestions = document.getElementById('committeeQuestions');
-    if (committeeQuestions) {
-        const questions = committeeQuestions.querySelectorAll('textarea');
-        questions.forEach(q => {
-            jsonData[q.name] = q.value;
-        });
-    }
+            showLoading();
 
-    // Add timestamp
-    jsonData['timestamp'] = firebase.database.ServerValue.TIMESTAMP;
+            const loadingOverlay = document.getElementById('loadingOverlay');
 
-    // Get a reference to the database
-    const database = firebase.database();
+            // Perform additional validations
+            const phone = form.querySelector('input[name="phone"]').value;
+            const email = form.querySelector('input[name="email"]').value;
+            const firstName = form.querySelector('input[name="firstName"]').value;
+            const lastName = form.querySelector('input[name="lastName"]').value;
 
-    // Push data to a 'recruitmentForms' node
-    database.ref('recruitmentForms').push(jsonData)
-        .then((ref) => {
-            hideLoading();
-            const successMsg = showSuccessMessage();
-            setTimeout(() => {
-                document.body.removeChild(successMsg);
-                showQuoteModal(); // Show the quote modal after removing the success message
-            }, 2000);
-            form.reset();
-            updateProgress();
-        })
-        .catch((error) => {
-            hideLoading();
-            console.error("Error adding document: ", error);
-            if (confirm("There was an error submitting your application. Would you like to try our backup Google Form instead?")) {
-                redirectToGoogleForm();
-            } else {
-                alert('Please try submitting your application again later.');
+            if (!isValidEgyptianPhoneNumber(phone)) {
+                alert('Please enter a valid Egyptian phone number.');
+                return;
+            }
+            if (!isValidEmail(email)) {
+                alert('Please enter a valid email address.');
+                return;
+            }
+            if (!isValidFirstName(firstName)) {
+                alert('Please enter a valid name (only letters and spaces).');
+                return;
+            }
+            if (!isValidLastName(lastName)) {
+                alert('Please enter a valid name (only letters and spaces).');
+                return;
+            }
+
+            // If all validations pass, proceed with form submission
+            loadingOverlay.classList.add('active');
+
+            const formData = new FormData(form);
+            const jsonData = {};
+
+            // Handle regular form fields
+            formData.forEach((value, key) => {
+                if (key !== 'skills') {
+                    jsonData[key] = value;
+                }
+            });
+
+            // Handle skills checkboxes
+            const selectedSkills = Array.from(document.querySelectorAll('.skill-checkbox:checked'))
+                .map(checkbox => checkbox.value);
+            jsonData['skills'] = selectedSkills;
+
+            // Add committee-specific questions and answers
+            const committeeQuestions = document.getElementById('committeeQuestions');
+            if (committeeQuestions) {
+                const questions = committeeQuestions.querySelectorAll('textarea');
+                questions.forEach(q => {
+                    jsonData[q.name] = q.value;
+                });
+            }
+
+            // Add timestamp
+            jsonData['timestamp'] = firebase.database.ServerValue.TIMESTAMP;
+
+            // Get a reference to the database
+            const database = firebase.database();
+
+            // Push data to a 'recruitmentForms' node
+            database.ref('recruitmentForms').push(jsonData)
+                .then((ref) => {
+                    hideLoading();
+                    const successMsg = showSuccessMessage();
+                    setTimeout(() => {
+                        document.body.removeChild(successMsg);
+                        showQuoteModal(); // Show the quote modal after removing the success message
+                    }, 2000);
+                    form.reset();
+                    updateProgress();
+                })
+                .catch((error) => {
+                    hideLoading();
+                    console.error("Error adding document: ", error);
+                    if (confirm("There was an error submitting your application. Would you like to try our backup Google Form instead?")) {
+                        redirectToGoogleForm();
+                    } else {
+                        alert('Please try submitting your application again later.');
+                    }
+                });
+        }
+        // Make sure this event listener is present
+        document.addEventListener('DOMContentLoaded', function () {
+            document.getElementById('recruitmentForm').addEventListener('submit', submitForm);
+
+            // Add event listener for closing quote modal
+            const closeQuoteButton = document.querySelector('.close-quote');
+            if (closeQuoteButton) {
+                closeQuoteButton.addEventListener('click', function () {
+                    document.querySelector('.quote-modal').style.display = 'none';
+                });
             }
         });
-}
-// Make sure this event listener is present
-document.addEventListener('DOMContentLoaded', function() {
-    document.getElementById('recruitmentForm').addEventListener('submit', submitForm);
-    
-    // Add event listener for closing quote modal
-    const closeQuoteButton = document.querySelector('.close-quote');
-    if (closeQuoteButton) {
-        closeQuoteButton.addEventListener('click', function() {
-            document.querySelector('.quote-modal').style.display = 'none';
+
+
+        // Sharing functions with actual application URL
+        function shareWhatsApp() {
+            const text = encodeURIComponent("🌟 Join Enactus Menoufia and make a difference! 🌟\nApply now: https://enactusmenoufia.github.io/recruitment");
+            window.open(`https://wa.me/?text=${text}`, '_blank');
+        }
+
+        function shareFacebook() {
+            const url = encodeURIComponent("https://enactusmenoufia.github.io/recruitment");
+            const caption = encodeURIComponent("🌍 Join us at Enactus Menoufia! Make a difference in your community. Apply now! 💪");
+            window.open(`https://www.facebook.com/sharer/sharer.php?u=${url}&quote=${caption}`, '_blank');
+        }
+
+        function shareInstagram() {
+            const message = encodeURIComponent("📸 Spread the word! Join Enactus Menoufia and make a difference! 🌟\nApply now: https://enactusmenoufia.github.io/recruitment");
+            const instagramShareUrl = `instagram://library?AssetPath=https://i.postimg.cc/mDxr6n1S/Artboard-1-1-topaz-enhance-3-2x-faceai.jpg&InstagramCaption=${message}`;
+
+            // Attempt to open the Instagram app
+            window.location.href = instagramShareUrl;
+
+            // Fallback for browsers that do not support the Instagram URL scheme
+            alert("If the Instagram app does not open, please copy this message and share it manually in your story or post:\n\n" + message);
+        }
+
+        function shareMessenger() {
+            const url = encodeURIComponent("https://enactusmenoufia.github.io/recruitment");
+            const caption = encodeURIComponent("🚀 Join Enactus Menoufia! Together we can make a difference. Apply now! 🌈");
+            window.open(`https://www.facebook.com/dialog/send?link=${url}&app_id=123456789&quote=${caption}`, '_blank');
+        }
+
+        // Other faculty option
+        const facultySelect = document.getElementById('faculty');
+
+        const otherFacultyInput = document.getElementById('otherFaculty');
+
+        facultySelect.addEventListener('change', () => {
+            if (facultySelect.value === 'other') {
+
+                otherFacultyInput.required = true;
+            } else {
+
+                otherFacultyInput.required = false;
+            }
         });
-    }
-});
 
-
-// Sharing functions with actual application URL
-function shareWhatsApp() {
-    const text = encodeURIComponent("🌟 Join Enactus Menoufia and make a difference! 🌟\nApply now: https://enactusmenoufia.github.io/recruitment");
-    window.open(`https://wa.me/?text=${text}`, '_blank');
-}
-
-function shareFacebook() {
-    const url = encodeURIComponent("https://enactusmenoufia.github.io/recruitment");
-    const caption = encodeURIComponent("🌍 Join us at Enactus Menoufia! Make a difference in your community. Apply now! 💪");
-    window.open(`https://www.facebook.com/sharer/sharer.php?u=${url}&quote=${caption}`, '_blank');
-}
-
-function shareInstagram() {
-    const message = encodeURIComponent("📸 Spread the word! Join Enactus Menoufia and make a difference! 🌟\nApply now: https://enactusmenoufia.github.io/recruitment");
-    const instagramShareUrl = `instagram://library?AssetPath=https://i.postimg.cc/mDxr6n1S/Artboard-1-1-topaz-enhance-3-2x-faceai.jpg&InstagramCaption=${message}`;
-    
-    // Attempt to open the Instagram app
-    window.location.href = instagramShareUrl;
-    
-    // Fallback for browsers that do not support the Instagram URL scheme
-    alert("If the Instagram app does not open, please copy this message and share it manually in your story or post:\n\n" + message);
-}
-
-function shareMessenger() {
-    const url = encodeURIComponent("https://enactusmenoufia.github.io/recruitment");
-    const caption = encodeURIComponent("🚀 Join Enactus Menoufia! Together we can make a difference. Apply now! 🌈");
-    window.open(`https://www.facebook.com/dialog/send?link=${url}&app_id=123456789&quote=${caption}`, '_blank');
-}
-
-// Other faculty option
-const facultySelect = document.getElementById('faculty');
-
-const otherFacultyInput = document.getElementById('otherFaculty');
-
-facultySelect.addEventListener('change', () => {
-    if (facultySelect.value === 'other') {
-    
-        otherFacultyInput.required = true;
-    } else {
-       
-        otherFacultyInput.required = false;
-    }
-});
-
-// Floating help button
-const floatingHelp = document.querySelector('.floating-help');
-floatingHelp.addEventListener('click', () => {
-    alert('Need help? Contact us at enactusmenoufiahr@gmail.com or call +20 1225370794');
-});
-// Add this to your existing JavaScript
-const inspirationalQuotes = [
-    {
-        text: "Be the change that ignites possibilities. Your journey with Enactus starts today!",
-        author: "Enactus Menoufia"
-    },
-    {
-        text: "Together we rise, united we transform. Welcome to the Enactus family!",
-        author: "Enactus Menoufia"
-    },
-    {
-        text: "Your potential to create change is limitless. Let's make an impact together!",
-        author: "Enactus Menoufia"
-    },
-    {
-        text: "The future belongs to those who believe in the beauty of their dreams.",
-        author: "Eleanor Roosevelt"
-    },
-    {
-        text: "Success is not the key to happiness. Happiness is the key to success.",
-        author: "Albert Schweitzer"
-    },
-    {
-        text: "Believe you can and you’re halfway there.",
-        author: "Theodore Roosevelt"
-    },
-    {
-        text: "Your only limit is you.",
-        author: "Mahmoud E."
-    },
-    {
-        text: "Act as if what you do makes a difference. It does.",
-        author: "William James"
-    },
-    {
-        text: "Opportunities don't happen. You create them.",
-        author: "Chris Grosser"
-    },
-    {
-        text: "Success usually comes to those who are too busy to be looking for it.",
-        author: "Henry David Thoreau"
-    },
-    {
-        text: "What lies behind us and what lies before us are tiny matters compared to what lies within us.",
-        author: "Ralph Waldo Emerson"
-    },
-    {
-        text: "Your time is limited, don't waste it living someone else's life.",
-        author: "Steve Jobs"
-    },
-    {
-        text: "Dream big and dare to fail.",
-        author: "Norman Vaughan"
-    },
-    {
-        text: "Don't watch the clock; do what it does. Keep going.",
-        author: "Sam Levenson"
-    },
-    {
-        text: "It always seems impossible until it's done.",
-        author: "Nelson Mandela"
-    },
-    {
-        text: "Success is not in what you have, but who you are.",
-        author: "Bo Bennett"
-    },
-    {
-        text: "The only way to do great work is to love what you do.",
-        author: "Steve Jobs"
-    },
-    {
-        text: "Every day may not be good, but there’s something good in every day.",
-        author: "Mahmoud E."
-    },
-    {
-        text: "Believe in yourself, and the rest will fall into place.",
-        author: "Roy T. Bennett"
-    },
-    {
-        text: "You are never too old to set another goal or to dream a new dream.",
-        author: "C.S. Lewis"
-    },
-    {
-        text: "Start where you are. Use what you have. Do what you can.",
-        author: "Arthur Ashe"
-    },
-    {
-        text: "The only limit to our realization of tomorrow will be our doubts of today.",
-        author: "Franklin D. Roosevelt"
-    },
-    {
-        text: "Success is walking from failure to failure with no loss of enthusiasm.",
-        author: "Winston S. Churchill"
-    },
-    {
-        text: "Failure will never overtake me if my determination to succeed is strong enough.",
-        author: "Og Mandino"
-    },
-    {
-        text: "You miss 100% of the shots you don’t take.",
-        author: "Wayne Gretzky"
-    },
-    {
-        text: "Hardships often prepare ordinary people for an extraordinary destiny.",
-        author: "C.S. Lewis"
-    },
-    {
-        text: "The way to get started is to quit talking and begin doing.",
-        author: "Walt Disney"
-    },
-    {
-        text: "Doing nothing is a great way to be nothing.",
-        author: "David S. Kidder"
-    },
-    {
-        text: "In the middle of every difficulty lies opportunity.",
-        author: "Albert Einstein"
-    },
-    {
-        text: "The best way to predict the future is to create it.",
-        author: "Peter Drucker"
-    },
-    {
-        text: "Everything you’ve ever wanted is on the other side of fear.",
-        author: "George Addair"
-    },
-    {
-        text: "Success is not how high you have climbed, but how you make a positive difference to the world.",
-        author: "Roy T. Bennett"
-    },
-    {
-        text: "Keep your face always toward the sunshine—and shadows will fall behind you.",
-        author: "Walt Whitman"
-    },
-    {
-        text: "Challenges are what make life interesting; overcoming them is what makes life meaningful.",
-        author: "Joshua J. Marine"
-    },
-    {
-        text: "You can’t use up creativity. The more you use, the more you have.",
-        author: "Maya Angelou"
-    },
-    {
-        text: "The only person you are destined to become is the person you decide to be.",
-        author: "Ralph Waldo Emerson"
-    },
-    {
-        text: "Doubt kills more dreams than failure ever will.",
-        author: "Suzy Kassem"
-    },
-    {
-        text: "Everything you can imagine is real.",
-        author: "Pablo Picasso"
-    },
-    {
-        text: "It does not matter how slowly you go as long as you do not stop.",
-        author: "Confucius"
-    },
-    {
-        text: "Success is not about what you have, but about how much you have inspired others.",
-        author: "Mahmoud E."
-    },
-    {
-        text: "Aim for the moon. If you miss, you may hit a star.",
-        author: "W. Clement Stone"
-    },
-    {
-        text: "The greatest glory in living lies not in never falling, but in rising every time we fall.",
-        author: "Nelson Mandela"
-    },
-    {
-        text: "What you get by achieving your goals is not as important as what you become by achieving your goals.",
-        author: "Zig Ziglar"
-    }
-];
+        // Floating help button
+        const floatingHelp = document.querySelector('.floating-help');
+        floatingHelp.addEventListener('click', () => {
+            alert('Need help? Contact us at enactusmenoufiahr@gmail.com or call +20 1225370794');
+        });
+        // Add this to your existing JavaScript
+        const inspirationalQuotes = [
+            {
+                text: "Be the change that ignites possibilities. Your journey with Enactus starts today!",
+                author: "Enactus Menoufia"
+            },
+            {
+                text: "Together we rise, united we transform. Welcome to the Enactus family!",
+                author: "Enactus Menoufia"
+            },
+            {
+                text: "Your potential to create change is limitless. Let's make an impact together!",
+                author: "Enactus Menoufia"
+            },
+            {
+                text: "The future belongs to those who believe in the beauty of their dreams.",
+                author: "Eleanor Roosevelt"
+            },
+            {
+                text: "Success is not the key to happiness. Happiness is the key to success.",
+                author: "Albert Schweitzer"
+            },
+            {
+                text: "Believe you can and you’re halfway there.",
+                author: "Theodore Roosevelt"
+            },
+            {
+                text: "Your only limit is you.",
+                author: "Mahmoud E."
+            },
+            {
+                text: "Act as if what you do makes a difference. It does.",
+                author: "William James"
+            },
+            {
+                text: "Opportunities don't happen. You create them.",
+                author: "Chris Grosser"
+            },
+            {
+                text: "Success usually comes to those who are too busy to be looking for it.",
+                author: "Henry David Thoreau"
+            },
+            {
+                text: "What lies behind us and what lies before us are tiny matters compared to what lies within us.",
+                author: "Ralph Waldo Emerson"
+            },
+            {
+                text: "Your time is limited, don't waste it living someone else's life.",
+                author: "Steve Jobs"
+            },
+            {
+                text: "Dream big and dare to fail.",
+                author: "Norman Vaughan"
+            },
+            {
+                text: "Don't watch the clock; do what it does. Keep going.",
+                author: "Sam Levenson"
+            },
+            {
+                text: "It always seems impossible until it's done.",
+                author: "Nelson Mandela"
+            },
+            {
+                text: "Success is not in what you have, but who you are.",
+                author: "Bo Bennett"
+            },
+            {
+                text: "The only way to do great work is to love what you do.",
+                author: "Steve Jobs"
+            },
+            {
+                text: "Every day may not be good, but there’s something good in every day.",
+                author: "Mahmoud E."
+            },
+            {
+                text: "Believe in yourself, and the rest will fall into place.",
+                author: "Roy T. Bennett"
+            },
+            {
+                text: "You are never too old to set another goal or to dream a new dream.",
+                author: "C.S. Lewis"
+            },
+            {
+                text: "Start where you are. Use what you have. Do what you can.",
+                author: "Arthur Ashe"
+            },
+            {
+                text: "The only limit to our realization of tomorrow will be our doubts of today.",
+                author: "Franklin D. Roosevelt"
+            },
+            {
+                text: "Success is walking from failure to failure with no loss of enthusiasm.",
+                author: "Winston S. Churchill"
+            },
+            {
+                text: "Failure will never overtake me if my determination to succeed is strong enough.",
+                author: "Og Mandino"
+            },
+            {
+                text: "You miss 100% of the shots you don’t take.",
+                author: "Wayne Gretzky"
+            },
+            {
+                text: "Hardships often prepare ordinary people for an extraordinary destiny.",
+                author: "C.S. Lewis"
+            },
+            {
+                text: "The way to get started is to quit talking and begin doing.",
+                author: "Walt Disney"
+            },
+            {
+                text: "Doing nothing is a great way to be nothing.",
+                author: "David S. Kidder"
+            },
+            {
+                text: "In the middle of every difficulty lies opportunity.",
+                author: "Albert Einstein"
+            },
+            {
+                text: "The best way to predict the future is to create it.",
+                author: "Peter Drucker"
+            },
+            {
+                text: "Everything you’ve ever wanted is on the other side of fear.",
+                author: "George Addair"
+            },
+            {
+                text: "Success is not how high you have climbed, but how you make a positive difference to the world.",
+                author: "Roy T. Bennett"
+            },
+            {
+                text: "Keep your face always toward the sunshine—and shadows will fall behind you.",
+                author: "Walt Whitman"
+            },
+            {
+                text: "Challenges are what make life interesting; overcoming them is what makes life meaningful.",
+                author: "Joshua J. Marine"
+            },
+            {
+                text: "You can’t use up creativity. The more you use, the more you have.",
+                author: "Maya Angelou"
+            },
+            {
+                text: "The only person you are destined to become is the person you decide to be.",
+                author: "Ralph Waldo Emerson"
+            },
+            {
+                text: "Doubt kills more dreams than failure ever will.",
+                author: "Suzy Kassem"
+            },
+            {
+                text: "Everything you can imagine is real.",
+                author: "Pablo Picasso"
+            },
+            {
+                text: "It does not matter how slowly you go as long as you do not stop.",
+                author: "Confucius"
+            },
+            {
+                text: "Success is not about what you have, but about how much you have inspired others.",
+                author: "Mahmoud E."
+            },
+            {
+                text: "Aim for the moon. If you miss, you may hit a star.",
+                author: "W. Clement Stone"
+            },
+            {
+                text: "The greatest glory in living lies not in never falling, but in rising every time we fall.",
+                author: "Nelson Mandela"
+            },
+            {
+                text: "What you get by achieving your goals is not as important as what you become by achieving your goals.",
+                author: "Zig Ziglar"
+            }
+        ];
 
 
 
 
-document.addEventListener('DOMContentLoaded', function() {
-    window.showQuoteModal = function() {
-        const modal = document.querySelector('.quote-modal');
-        const randomQuote = inspirationalQuotes[Math.floor(Math.random() * inspirationalQuotes.length)];
-        
-        document.querySelector('.quote-text').textContent = randomQuote.text;
-        document.querySelector('.quote-author').textContent = "- " + randomQuote.author;
-        
-        modal.style.display = 'flex';
-    }
-});
+        document.addEventListener('DOMContentLoaded', function () {
+            window.showQuoteModal = function () {
+                const modal = document.querySelector('.quote-modal');
+                const randomQuote = inspirationalQuotes[Math.floor(Math.random() * inspirationalQuotes.length)];
 
-// Event listener for closing the modal
-document.addEventListener('DOMContentLoaded', () => {
-    document.querySelector('.close-quote').addEventListener('click', () => {
-        document.querySelector('.quote-modal').style.display = 'none'; // Hide the modal
-    });
-}); // <-- Missing closing parenthesis added here
+                document.querySelector('.quote-text').textContent = randomQuote.text;
+                document.querySelector('.quote-author').textContent = "- " + randomQuote.author;
 
-// Function to share the quote on different platforms
-function shareQuote(platform) {
-    const quote = document.querySelector('.quote-text').textContent;
-    const shareText = `${quote} - Join Enactus Menoufia: https://enactusmenoufia.github.io/recruitment`;
-    
-    switch(platform) {
-        case 'whatsapp':
-            window.open(`https://wa.me/?text=${encodeURIComponent(shareText)}`, '_blank');
-            break;
-        case 'facebook':
-            window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent('https://enactusmenoufia.github.io/recruitment')}&quote=${encodeURIComponent(shareText)}`, '_blank');
-            break;
-        case 'twitter':
-            window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}`, '_blank');
-            break;
-        default:
-            console.error('Unsupported platform: ' + platform);
-    }
-}
+                modal.style.display = 'flex';
+            }
+        });
 
-function takeScreenshot() {
-    // This is a simple alert as actual screenshot functionality would require additional libraries
-    alert('Screenshot the quote and share it with your friends!');
-}
+        // Event listener for closing the modal
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelector('.close-quote').addEventListener('click', () => {
+                document.querySelector('.quote-modal').style.display = 'none'; // Hide the modal
+            });
+        }); // <-- Missing closing parenthesis added here
 
-// Update your form submission callback to show the quote modal
-window.formSubmitCallback = function(response) {
-    loadingOverlay.classList.remove('active');
-    if (response.result === 'success') {
-        showQuoteModal();
-        form.reset();
-        updateProgress();
-    } else {
-        alert('There was an error submitting your application. Please try again later.');
-        console.error('Submission error:', response.error);
-    }
-    document.body.removeChild(script);
-    delete window.formSubmitCallback;
-};
+        // Function to share the quote on different platforms
+        function shareQuote(platform) {
+            const quote = document.querySelector('.quote-text').textContent;
+            const shareText = `${quote} - Join Enactus Menoufia: https://enactusmenoufia.github.io/recruitment`;
 
-</script>
-<!-- Add this right before the closing body tag -->
-<div class="quote-modal" style="display: none;">
-    <div class="quote-content">
-        <button class="close-quote">&times;</button>
-        <p class="quote-text"></p>
-        <p class="quote-author"></p>
-        <div class="quote-share-buttons">
-            <button onclick="shareQuote('whatsapp')" class="quote-share-button">
-                <i class="fab fa-whatsapp"></i> WhatsApp
-            </button>
-            <button onclick="shareQuote('facebook')" class="quote-share-button">
-                <i class="fab fa-facebook"></i> Facebook
-            </button>
-            <button onclick="shareQuote('twitter')" class="quote-share-button">
-                <i class="fab fa-twitter"></i> Twitter
-            </button>
+            switch (platform) {
+                case 'whatsapp':
+                    window.open(`https://wa.me/?text=${encodeURIComponent(shareText)}`, '_blank');
+                    break;
+                case 'facebook':
+                    window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent('https://enactusmenoufia.github.io/recruitment')}&quote=${encodeURIComponent(shareText)}`, '_blank');
+                    break;
+                case 'twitter':
+                    window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}`, '_blank');
+                    break;
+                default:
+                    console.error('Unsupported platform: ' + platform);
+            }
+        }
+
+        function takeScreenshot() {
+            // This is a simple alert as actual screenshot functionality would require additional libraries
+            alert('Screenshot the quote and share it with your friends!');
+        }
+
+        // Update your form submission callback to show the quote modal
+        window.formSubmitCallback = function (response) {
+            loadingOverlay.classList.remove('active');
+            if (response.result === 'success') {
+                showQuoteModal();
+                form.reset();
+                updateProgress();
+            } else {
+                alert('There was an error submitting your application. Please try again later.');
+                console.error('Submission error:', response.error);
+            }
+            document.body.removeChild(script);
+            delete window.formSubmitCallback;
+        };
+
+    </script>
+    <!-- Add this right before the closing body tag -->
+    <div class="quote-modal" style="display: none;">
+        <div class="quote-content">
+            <button class="close-quote">&times;</button>
+            <p class="quote-text"></p>
+            <p class="quote-author"></p>
+            <div class="quote-share-buttons">
+                <button onclick="shareQuote('whatsapp')" class="quote-share-button">
+                    <i class="fab fa-whatsapp"></i> WhatsApp
+                </button>
+                <button onclick="shareQuote('facebook')" class="quote-share-button">
+                    <i class="fab fa-facebook"></i> Facebook
+                </button>
+                <button onclick="shareQuote('twitter')" class="quote-share-button">
+                    <i class="fab fa-twitter"></i> Twitter
+                </button>
+            </div>
+            <p class="share-prompt">Share this quote in the comment section!</p>
         </div>
-        <p class="share-prompt">Share this quote in the comment section!</p>
     </div>
-</div>
 
 </body>
+
 </html>
